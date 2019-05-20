@@ -1,0 +1,17 @@
+.nav-container {
+  display: flex;
+}
+
+.nav-links {
+  display: flex;
+  width: 300px;
+
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-left: 65%;
+}
+
+.nav-link {
+  width: 100px;
+  text-align: center;
+}
