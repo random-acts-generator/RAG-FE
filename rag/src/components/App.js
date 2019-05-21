@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 import PrivateRoute from "./PrivateRoute";
+import { connect } from "react-redux";
+import { getData } from "../actions";
 
 import "../styles/index.css";
 
@@ -24,4 +26,7 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  { getData }
+)(App);
