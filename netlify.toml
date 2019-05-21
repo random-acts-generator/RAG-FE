@@ -5,5 +5,5 @@ command = "yarn build"
 
 [[redirects]]
 from = "rag/*"
-to = "/index.html"
+to = "rag/index.html"
 status = 200
