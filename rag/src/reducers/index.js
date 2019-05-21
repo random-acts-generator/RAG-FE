@@ -6,7 +6,9 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAILED,
   LOGOUT,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  FETCHING_DATA,
+  FETCHING_DATA_SUCCESS
 } from "../actions";
 
 const initialState = {
@@ -49,7 +51,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         error: "",
         loggingIn: false,
-        user: action.payload,
+        user: action.payload.user,
         isLoggedIn: true
       };
     case LOGIN_FAILED:
@@ -72,6 +74,19 @@ const reducer = (state = initialState, action) => {
         error: "",
         user: {},
         isLoggedIn: false
+      };
+    case FETCHING_DATA:
+      return {
+        ...state,
+        user: action.payload.user,
+        error: "",
+        isLoggedIn: true
+      };
+    case FETCHING_DATA_SUCCESS:
+      return {
+        ...state,
+        error: "",
+        isLoggedIn: true
       };
     default:
       return state;

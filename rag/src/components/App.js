@@ -2,6 +2,7 @@ import React from "react";
 import HomePage from "./HomePage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginForm from "./LoginForm";
+import ProfileForm from "./ProfileForm";
 import RegistrationForm from "./RegistrationForm";
 import PrivateRoute from "./PrivateRoute";
 import { connect } from "react-redux";
@@ -21,6 +22,7 @@ class App extends React.Component {
         <Route path="/login" component={LoginForm} />
         <Route exact path="/" component={RegistrationForm} />
         <PrivateRoute exact path="/homepage" component={HomePage} />
+        <PrivateRoute exact path="/profile" component={ProfileForm} />
       </Router>
     );
   }
