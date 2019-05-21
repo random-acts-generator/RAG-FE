@@ -3,6 +3,7 @@ import "../styles/nav.css";
 import logo from "../assets/rag_pic_logo1xJustHelp.png";
 import { logout } from "../actions";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 class Nav extends React.Component {
   onLogout = e => {
@@ -19,9 +20,15 @@ class Nav extends React.Component {
           </div>
           {this.props.isLoggedIn && (
             <div className="nav-links">
-              <div className="nav-link">Contacts</div>
-              <div className="nav-link">Kind Acts</div>
-              <div className="nav-link">Profile</div>
+              <NavLink to="/profile" className="nav-link">
+                Contacts
+              </NavLink>
+              <NavLink to="/profile" className="nav-link">
+                Kind Acts
+              </NavLink>
+              <NavLink to="/profile" className="nav-link">
+                Profile
+              </NavLink>
               <div className="nav-link" onClick={this.onLogout}>
                 Logout
               </div>
