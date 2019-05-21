@@ -65,23 +65,32 @@ body {
 .body-container {
   display: flex;
   align-items: center;
+  border: 0px solid white;
+  height: 525px;
 }
 
 .left-section {
   width: 30%;
-  height: 60%;
+  height: 100%;
   margin-left: 5%;
   text-align: center;
-  vertical-align: middle;
+  border: 0px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .right-section {
   width: 50%;
   margin-left: 10%;
-  padding: 5%;
   text-align: center;
   border: 0px solid white;
   align-items: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .right-section-content {
   font-size: 2.5rem;
@@ -89,19 +98,14 @@ body {
   line-height: 80px;
 }
 
-.right-section-container {
-  height: 350px;
-  border: 0px solid white;
-}
-
 .generate-btn {
   width: 400px;
-  height: 50px;
+  height: 35px;
   background: #1762a7;
-  border-radius: 20px;
+  border-radius: 10px;
   text-align: center;
-  padding-top: 2.5%;
-  margin-left: 15%;
+  padding-top: 1.5%;
+  margin-top: 2%;
 }
 
 .left-image {

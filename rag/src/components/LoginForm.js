@@ -17,17 +17,15 @@ function LoginForm(props) {
           />
         </section>
         <section className="right-section">
-          <div className="right-section-container">
-            <div className="right-section-container-login">
-              <div className="form-text">Email</div>
-              <div className="form-element">
-                <input className="form-input" type="text" />
-              </div>
-              <div className="form-text">Password</div>
-              <div className="form-element">
-                <input className="form-input" type="password" />
-                <button className="login-btn">Start Changing</button>
-              </div>
+          <div className="right-section-container-login">
+            <div className="form-text">Email</div>
+            <div className="form-element">
+              <input className="form-input" type="text" />
+            </div>
+            <div className="form-text">Password</div>
+            <div className="form-element">
+              <input className="form-input" type="password" />
+              <button className="login-btn">Start Changing</button>
             </div>
           </div>
         </section>

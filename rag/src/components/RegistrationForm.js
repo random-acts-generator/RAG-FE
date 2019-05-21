@@ -17,15 +17,32 @@ function RegistrationForm(props) {
           <img className="left-image" src={TitlePic} alt="Title picture" />
         </section>
         <section className="right-section">
-          <div className="right-section-container">
-            <div className="right-section-content">
-              Organize and clean the pantry
+          <div className="right-section-container-register">
+            <div className="form-text-register">First Name</div>
+            <div className="form-element">
+              <input className="form-input-register" type="text" />
             </div>
-            <div className="right-section-content">for Thomas Cook</div>
+            <div className="form-text-register">Last Name</div>
+            <div className="form-element">
+              <input className="form-input-register" type="text" />
+            </div>
+            <div className="form-text-register">Email</div>
+            <div className="form-element">
+              <input className="form-input-register" type="text" />
+            </div>
+            <div className="form-text-register">Phone Number</div>
+            <div className="form-element">
+              <input className="form-input-register" type="text" />
+            </div>
+            <div className="form-text-register">Password</div>
+            <div className="form-element">
+              <input className="form-input-register" type="password" />
+              <button className="login-btn">Join Now</button>
+            </div>
           </div>
-          <div className="generate-btn">Generate a new act of kindness</div>
         </section>
       </div>
+      <div className="login-filler" />
       <Footer />
     </div>
   );
