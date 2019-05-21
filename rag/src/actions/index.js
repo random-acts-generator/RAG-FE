@@ -16,7 +16,7 @@ export const login = creds => dispatch => {
       localStorage.setItem("token", res.data.token);
       const saved = JSON.stringify(res.data);
       localStorage.setItem("data", saved);
-      console.log("LOGIN RESPONSE IS ----------->" + res);
+      console.log("LOGIN RESPONSE IS ----------->" + JSON.stringify(res));
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILED, payload: err });
@@ -35,7 +35,7 @@ export const register = creds => dispatch => {
     .post(`${URL}/api/auth/register/`, creds)
     .then(res => {
       localStorage.setItem("token", res.data.token);
-      dispatch({ type: REGISTER_SUCCESS });
+      dispatch({ type: REGISTER_SUCCESS, payload: creds });
       console.log("REGISTER RESPONSE IS ----->" + JSON.stringify(res));
     })
     .catch(err => {

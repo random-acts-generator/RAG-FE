@@ -14,9 +14,10 @@
 .nav-link {
   width: 100px;
   text-align: center;
+  cursor: pointer;
 }
 
-/* .nav-links a {
+.nav-links a {
   text-decoration: none;
   color: white;
   font-weight: bold;
@@ -29,4 +30,4 @@
 
 .nav-links a.active {
   border-bottom: 1px solid #b41561;
-} */
+}
