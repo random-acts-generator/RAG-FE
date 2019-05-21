@@ -4,6 +4,6 @@ publish = "rag/build/"
 command = "yarn build"
 
 [[redirects]]
-from = "rag/*"
-to = "rag/index.html"
+from = "/*"
+to = "/index.html"
 status = 200
