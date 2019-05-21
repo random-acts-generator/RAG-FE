@@ -1,0 +1,92 @@
+.left-image-text {
+  width: 110%;
+  height: auto;
+}
+.right-section-container-login {
+  height: 350px;
+  width: 70%;
+  background-color: black;
+  border-radius: 10px;
+}
+
+.right-section-register {
+  border: 1px solid white;
+  width: 70%;
+  margin-left: 10%;
+  border: 1px solid white;
+}
+
+.right-section-container-register {
+  width: 70%;
+  background-color: black;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.login-filler {
+  height: 30px;
+}
+.form-text {
+  font-size: 1rem;
+  text-align: left;
+  padding-top: 7%;
+  padding-left: 10%;
+}
+.form-element {
+  text-align: left;
+  padding-left: 10%;
+}
+
+input[type="text"],
+textarea {
+  background-color: black;
+  border-radius: 5px;
+  border: 2px solid #1762a7;
+  width: 400px;
+  height: 40px;
+  font-size: 0.9rem;
+  color: white;
+}
+
+input[type="text"]:focus,
+textarea {
+  outline: none;
+}
+input[type="password"]:focus,
+textarea {
+  outline: none;
+}
+
+input[type="password"],
+textarea {
+  border-radius: 5px;
+  border: 2px solid #1762a7;
+  width: 400px;
+  height: 40px;
+  font-size: 0.9rem;
+  background-color: black;
+  color: white;
+}
+.form-element {
+  padding-left: 10%;
+  border-radius: 10px;
+}
+
+.login-btn {
+  width: 300px;
+  height: 35px;
+  background: #1762a7;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 10%;
+  color: white;
+  font-size: 1rem;
+  margin-left: 12%;
+  border: none;
+}
+.form-text-register {
+  font-size: 1rem;
+  text-align: left;
+  padding-top: 5%;
+  padding-left: 10%;
+}

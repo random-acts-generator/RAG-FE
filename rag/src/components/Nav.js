@@ -9,11 +9,13 @@ function Nav(props) {
         <div className="brand-logo">
           <img className="logo" src={logo} alt="Brand logo" />
         </div>
-        <div className="nav-links">
-          <div className="nav-link">Contacts</div>
-          <div className="nav-link">Kind Acts</div>
-          <div className="nav-link">Profile</div>
-        </div>
+        {props.isLoggedIn && (
+          <div className="nav-links">
+            <div className="nav-link">Contacts</div>
+            <div className="nav-link">Kind Acts</div>
+            <div className="nav-link">Profile</div>
+          </div>
+        )}
       </div>
       <div className="home-page-circle1" />
       <div className="home-page-circle2" />
