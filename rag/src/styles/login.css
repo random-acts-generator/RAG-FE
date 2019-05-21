@@ -78,7 +78,8 @@ textarea {
   background: #1762a7;
   border-radius: 10px;
   text-align: center;
-  margin-top: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
   color: white;
   font-size: 1rem;
   margin-left: 12%;
@@ -89,4 +90,9 @@ textarea {
   text-align: left;
   padding-top: 5%;
   padding-left: 10%;
+}
+.link-register {
+  text-decoration: none;
+  color: white;
+  border-bottom: 2px solid #b41561;
 }

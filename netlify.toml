@@ -1,0 +1,4 @@
+[build]
+base = "rag/"
+publish = "rag/build/"
+command = "yarn build"
