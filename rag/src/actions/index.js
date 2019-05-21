@@ -10,12 +10,12 @@ export const login = creds => dispatch => {
   console.log(":: IN ACTION -> LOGIN ::");
   dispatch({ type: LOGIN_START });
   return axios
-    .post(`${URL}/api/login`, creds)
+    .post(`${URL}/api/auth/login`, creds)
     .then(res => {
-      // dispatch({ type: LOGIN_SUCCESS, payload: res.data })
-      // localStorage.setItem('token', res.data.token)
-      // const saved = JSON.stringify(res.data)
-      // localStorage.setItem('data', saved)
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      localStorage.setItem("token", res.data.token);
+      const saved = JSON.stringify(res.data);
+      localStorage.setItem("data", saved);
       console.log("LOGIN RESPONSE IS ----------->" + res);
     })
     .catch(err => {
@@ -29,14 +29,14 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILED = "REGISTER_FAILED";
 
 export const register = creds => dispatch => {
-  console.log(":: IN ACTION -> REGISTER ::");
+  console.log(":: IN ACTION -> REGISTER ::" + JSON.stringify(creds));
   dispatch({ type: REGISTER_START });
   return axios
-    .post(`${URL}/api/register`, creds)
+    .post(`${URL}/api/auth/register/`, creds)
     .then(res => {
-      //   localStorage.setItem('token', res.data.token)
-      //   dispatch({ type: REGISTER_SUCCESS })
-      console.log("REGISTER RESPONSE IS ----->" + res);
+      localStorage.setItem("token", res.data.token);
+      dispatch({ type: REGISTER_SUCCESS });
+      console.log("REGISTER RESPONSE IS ----->" + JSON.stringify(res));
     })
     .catch(err => {
       dispatch({ type: REGISTER_FAILED, payload: err });

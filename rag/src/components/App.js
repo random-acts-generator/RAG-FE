@@ -4,9 +4,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 import PrivateRoute from "./PrivateRoute";
-import axios from "axios";
-import { connect } from "react-redux";
-import { getData } from "../actions";
 
 import "../styles/index.css";
 
