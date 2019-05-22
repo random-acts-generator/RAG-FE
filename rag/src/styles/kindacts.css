@@ -1,11 +1,11 @@
-.left-section-container-contact {
-  height: 400px;
+.left-section-container-kindact {
+  height: 200px;
   width: 70%;
   background-color: black;
   border-radius: 10px;
 }
 
-.form-element-contact input[type="text"],
+.form-element-kindact input[type="text"],
 textarea {
   background-color: black;
   border-radius: 5px;
@@ -16,9 +16,10 @@ textarea {
   font-size: 0.9rem;
   color: white;
   margin-top: 1%;
+  text-align: left;
 }
 
-.contact-btn {
+.kindact-btn {
   width: 100px;
   height: 35px;
   background: #1762a7;
@@ -32,48 +33,42 @@ textarea {
   cursor: pointer;
 }
 
-.form-element-contact {
+.form-element-kindact {
   text-align: left;
   width: 100%;
+  margin-top: 3%;
 }
 
-.form-text-contact {
+.form-text-kindact {
   font-size: 1rem;
   text-align: left;
   padding-top: 7%;
   padding-left: 5%;
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
-.right-section-contact {
+.right-section-kindact {
   width: 50%;
   margin-left: 10%;
   border: 0px solid white;
   height: 100%;
 }
-.right-section-contact-heading {
+.right-section-kindact-heading {
   margin: 2%;
   border-bottom: 3px solid #746767;
   display: flex;
   font-size: 1.2rem;
   height: 30px;
 }
-.contact-heading1a {
-  width: 25%;
-}
-.contact-heading1b {
-  width: 25%;
+.kindact-heading1 {
+  width: 80%;
 }
 
-.contact-heading2 {
-  width: 25%;
+.kindact-heading3 {
+  width: 20%;
 }
 
-.contact-heading3 {
-  width: 10%;
-}
-
-.right-section-contact-content {
+.right-section-kindact-content {
   height: 40px;
   width: 96%;
   margin-left: 2%;
@@ -83,24 +78,18 @@ textarea {
   align-items: center;
 }
 
-.contact-heading1a-content {
-  width: 25%;
+.kindact-heading1-content {
+  width: 80%;
+  height: 20px;
+  overflow: hidden;
 }
 
-.contact-heading1b-content {
-  width: 25%;
-}
-
-.contact-heading2-content {
-  width: 25%;
-}
-
-.contact-heading3-content {
+.kindact-heading3-content {
   width: 20%;
   border: 0px solid white;
 }
 
-.contact-form-img {
+.kindact-form-img {
   width: 25px;
   margin-right: 10%;
   margin-left: 20%;
