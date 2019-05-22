@@ -8,7 +8,10 @@ import {
   LOGOUT,
   LOGOUT_SUCCESS,
   FETCHING_DATA,
-  FETCHING_DATA_SUCCESS
+  FETCHING_DATA_SUCCESS,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILED
 } from "../actions";
 
 const initialState = {
@@ -16,7 +19,9 @@ const initialState = {
   error: null,
   loggingIn: false,
   registering: false,
-  isLoggedIn: false
+  isLoggedIn: false,
+  contacts: {},
+  acts: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -87,6 +92,28 @@ const reducer = (state = initialState, action) => {
         ...state,
         error: "",
         isLoggedIn: true
+      };
+    case UPDATE_USER_START:
+      console.log(":: UPDATE USER START ::");
+      return {
+        ...state,
+        updatingUser: true,
+        error: ""
+      };
+    case UPDATE_USER_SUCCESS:
+      console.log(":: UPDATE USER SUCCESS ::");
+      return {
+        ...state,
+        user: action.payload.account,
+        updatingUser: false,
+        error: ""
+      };
+    case UPDATE_USER_FAILED:
+      console.log(":: UPDATE USER FAILED ::");
+      return {
+        ...state,
+        updatingUser: false,
+        error: action.payload
       };
     default:
       return state;

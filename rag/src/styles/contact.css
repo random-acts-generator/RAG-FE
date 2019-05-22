@@ -1,0 +1,45 @@
+.left-section-container-contact {
+  height: 250px;
+  width: 70%;
+  background-color: black;
+  border-radius: 10px;
+}
+
+.form-element-contact input[type="text"],
+textarea {
+  background-color: black;
+  border-radius: 5px;
+  border: 2px solid #1762a7;
+  width: 90%;
+  margin-left: 5%;
+  height: 40px;
+  font-size: 0.9rem;
+  color: white;
+  margin-top: 3%;
+}
+
+.contact-btn {
+  width: 100px;
+  height: 35px;
+  background: #1762a7;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 15%;
+  margin-bottom: 5%;
+  color: white;
+  font-size: 0.8rem;
+  border: none;
+}
+
+.form-element-contact {
+  text-align: left;
+  width: 100%;
+}
+
+.form-text-contact {
+  font-size: 1rem;
+  text-align: left;
+  padding-top: 7%;
+  padding-left: 5%;
+  margin-top: 8%;
+}

@@ -59,7 +59,8 @@ body {
 .logo {
   width: 150px;
   height: auto;
-  margin: 15%;
+  margin-left: 15%;
+  margin-top: 5%;
 }
 
 .body-container {

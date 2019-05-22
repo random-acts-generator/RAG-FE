@@ -64,3 +64,27 @@ export const getData = data => dispatch => {
   dispatch({ type: FETCHING_DATA, payload: data });
   dispatch({ type: FETCHING_DATA_SUCCESS });
 };
+
+export const UPDATE_USER_START = "UPDATE_USER_START";
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAILED = "UPDATE_USER_FAILED";
+
+export const updateUser = (newUser, token) => dispatch => {
+  console.log(
+    ":: UPDATE USER - ACTION ::" + JSON.stringify(newUser),
+    JSON.stringify(token)
+  );
+  dispatch({ type: UPDATE_USER_START });
+  return axios
+    .put(`${URL}/api/users/${newUser.id}`, newUser, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: UPDATE_USER_SUCCESS, payload: res.data });
+      localStorage.setItem("data", JSON.stringify(res.data));
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_USER_FAILED, payload: err.response });
+      alert("Something is wrong, please try again");
+    });
+};
