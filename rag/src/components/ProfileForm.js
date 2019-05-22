@@ -3,34 +3,59 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import LeftImage from "../assets/rag_pic_grandmom.jpeg";
 import { connect } from "react-redux";
+import { updateUser } from "../actions";
+import { Link } from "react-router-dom";
 
 class ProfileForm extends React.Component {
-  state = {
-    credentials: {
-      first: "",
-      last: "",
-      phone: "",
-      email: "",
-      password: ""
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      credentials: {
+        first: "",
+        last: "",
+        phone: "",
+        email: "",
+        password: ""
+      },
+      token: ""
+    };
+  }
   componentDidMount() {
+    const token = localStorage.getItem("token");
+    console.log(":::: COMPONENT DID MOUNT IN PROFILE FORM:::");
     this.setState({
-      credentials: this.props.user
+      credentials: this.props.user,
+      token: token
     });
   }
+
   handleChanges = e => {
+    console.log("::: HANDLE CHANGES IN PROFILE FORM :::" + e.target.value);
+    e.persist();
     this.setState({
+      ...this.state,
       credentials: {
         ...this.state.credentials,
         [e.target.name]: e.target.value
       }
     });
   };
-  onSubmit = e => {
-    console.log(":: ON SUBMIT CLICKED IN PROFILE FORM ::");
+
+  updateUserInProfile = e => {
+    e.preventDefault();
+    console.log(
+      ":: ON SUBMIT CLICKED IN PROFILE FORM ::" +
+        JSON.stringify(this.state.credentails, JSON.stringify(this.state.token))
+    );
+    this.props.updateUser(this.state.credentials, this.state.token).then(() => {
+      this.props.history.push("/homepage");
+    });
+    console.log(":: COMPLETED UPDATE REDIRECTING TO HOMEPAGE ::");
+    //this.props.history.push("/homepage");
   };
+
   render() {
+    console.log(":: IN RENDER OF PROFILE FORM ::");
     return (
       <div>
         <Nav isLoggedIn={this.props.isLoggedIn} />
@@ -40,7 +65,11 @@ class ProfileForm extends React.Component {
           </section>
           <section className="right-section">
             <div className="right-section-container-register">
-              <form onSubmit={this.onSubmit}>
+              <form onSubmit={this.updateUserInProfile}>
+                <div className="form-text-register">Email</div>
+                <div className="form-element">
+                  {this.state.credentials.email}
+                </div>
                 <div className="form-text-register">First Name</div>
                 <div className="form-element">
                   <input
@@ -63,10 +92,7 @@ class ProfileForm extends React.Component {
                     onChange={this.handleChanges}
                   />
                 </div>
-                <div className="form-text-register">Email</div>
-                <div className="form-element">
-                  {this.state.credentials.email}
-                </div>
+
                 <div className="form-text-register">Phone Number</div>
                 <div className="form-element">
                   <input
@@ -88,9 +114,12 @@ class ProfileForm extends React.Component {
                     value={this.state.credentials.password}
                     onChange={this.handleChanges}
                   />
-                  <button className="login-btn" onClick={this.onSubmit}>
+                  <button className="profile-btn" type="submit">
                     Update Profile
                   </button>
+                  <Link to="/homepage">
+                    <button className="profile-btn">Cancel</button>
+                  </Link>
                 </div>
               </form>
             </div>
@@ -112,4 +141,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ProfileForm);
+export default connect(
+  mapStateToProps,
+  { updateUser }
+)(ProfileForm);

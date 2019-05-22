@@ -17,13 +17,14 @@ class Nav extends React.Component {
         <div className="nav-container">
           <div className="brand-logo">
             <img className="logo" src={logo} alt="Brand logo" />
+            <div className="welcome-msg">Welcome, {this.props.user.first}</div>
           </div>
           {this.props.isLoggedIn && (
             <div className="nav-links">
-              <NavLink to="/profile" className="nav-link">
+              <NavLink to="/contacts" className="nav-link">
                 Contacts
               </NavLink>
-              <NavLink to="/profile" className="nav-link">
+              <NavLink to="/acts" className="nav-link">
                 Kind Acts
               </NavLink>
               <NavLink to="/profile" className="nav-link">
@@ -44,7 +45,14 @@ class Nav extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    isLoggedIn: state.isLoggedIn
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { logout }
 )(Nav);
