@@ -30,7 +30,7 @@
 }
 
 .nav-links a.active {
-  border-bottom: 1px solid #b41561;
+  border-bottom: 3px solid #b41561;
 }
 
 .welcome-msg {
