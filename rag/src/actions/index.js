@@ -95,13 +95,17 @@ export const GET_CONTACTS_START = "GET_CONTACTS_START";
 export const GET_CONTACTS_SUCCESS = "GET_CONTACTS_SUCCESS";
 export const GET_CONTACTS_FAILED = "GET_CONTACTS_FAILED";
 
-export const getContacts = token => dispatch => {
+export const getContacts = (id, token) => dispatch => {
+  console.log(":: GET CONTACTS ACTION - ID IS " + id);
   dispatch({ type: GET_CONTACTS_START });
   return axios
-    .get(`${URL}/api/contacts/`, {
+    .get(`${URL}/api/users/${id}/contacts`, {
       headers: { Authorization: token }
     })
     .then(res => {
+      console.log(
+        ":: GET CONTACT SUCCESS RESPONSE DATA IS :: " + JSON.stringify(res)
+      );
       dispatch({ type: GET_CONTACTS_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -121,6 +125,9 @@ export const addContacts = (newContact, token) => dispatch => {
       headers: { Authorization: token }
     })
     .then(res => {
+      console.log(
+        ":: ADD CONTACTS - RESPONSE IS ::" + JSON.stringify(res.data)
+      );
       dispatch({ type: ADD_CONTACTS_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -133,10 +140,10 @@ export const DELETE_CONTACTS_START = "DELETE_CONTACTS_START";
 export const DELETE_CONTACTS_SUCCESS = "DELETE_CONTACTS_SUCCESS";
 export const DELETE_CONTACTS_FAILED = "DELETE_CONTACTS_FAILED";
 
-export const deleteContacts = (contactId, userId, token) => dispatch => {
+export const deleteContacts = (contactId, token) => dispatch => {
   dispatch({ type: DELETE_CONTACTS_START });
   return axios
-    .delete(`${URL}/api/contacts/${userId}/${contactId}`, {
+    .delete(`${URL}/api/contacts/${contactId}`, {
       headers: { Authorization: token }
     })
     .then(res => {

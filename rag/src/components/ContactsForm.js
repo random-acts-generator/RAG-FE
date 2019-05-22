@@ -5,33 +5,91 @@ import Bin from "../assets/rag_pic_bin.png";
 import Pencil from "../assets/rag_pic_pencil.png";
 import Save from "../assets/rag_pic_save.png";
 import "../styles/contact.css";
+import { addContacts, getContacts, URL, deleteContacts } from "../actions";
+import axios from "axios";
 
 import { connect } from "react-redux";
 
 class ContactsForm extends React.Component {
   constructor(props) {
     super(props);
+    let isRender;
     this.state = {
       newContact: {
-        first: "",
-        last: "",
-        phone: ""
+        contactFirst: "",
+        contactLast: "",
+        contactPhone: "",
+        relation: "map",
+        user_id: this.props.user.id
       },
-      isEditable: false
+      isLoading: "initial",
+      isDeleting: "initial"
     };
   }
+
+  componentDidMount() {
+    console.log(":: IN COMPONENT DID MOUNT ::");
+    const token = localStorage.getItem("token");
+    //this.props.getContacts(this.props.user.id);
+    // this.props.getContacts(this.props.user.id, token);
+    // this.setState({ ...this.state, contacts: this.props.contacts });
+
+    axios
+      .get(`${URL}/api/users/${this.props.user.id}/contacts`, {
+        headers: { Authorization: token }
+      })
+      .then(res => {
+        console.log(
+          ":: RESPONSE IN COMPONENT DID MOUNT IS ::" + JSON.stringify(res.data)
+        );
+        this.setState({
+          ...this.state,
+          contacts: res.data.account,
+          isLoading: false
+        });
+      })
+      .catch(err => {
+        alert("Something is wrong, please try again.");
+      });
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log("prev", prevProps);
+    if (this.props.contacts !== prevProps.contacts) {
+      this.setState({ contacts: this.props.contacts });
+    }
+  }
+
   handleChanges = e => {
     e.persist();
     this.setState({
       newContact: {
         ...this.state.newContact,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
+        user_id: this.props.user.id
       }
     });
   };
+
   onSubmit = e => {
     e.preventDefault();
-    console.log(":: ON SUBMIT CLICKED IN CONTACT FORM ::");
+    const token = localStorage.getItem("token");
+    console.log(":: ADD CONTACT FORM USER ID IS ::" + this.props.user.id);
+    console.log(
+      ":: ON SUBMIT CLICKED IN CONTACT FORM ::",
+      JSON.stringify(this.state.newContact)
+    );
+    this.props.addContacts(this.state.newContact, token);
+
+    this.setState({
+      newContact: {
+        contactFirst: "",
+        contactLast: "",
+        contactPhone: "",
+        relation: "map",
+        user_id: this.props.user.id
+      }
+    });
   };
 
   handleEditButton = e => {
@@ -41,7 +99,27 @@ class ContactsForm extends React.Component {
       isEditable: true
     });
   };
+
+  handleDeleteButton = id => {
+    const token = localStorage.getItem("token");
+    console.log(":: CALLING DELETE BUTTON IN CONTACT FORM ::" + id);
+    this.props
+      .deleteContacts(id, token)
+      .then(() => this.props.getContacts(this.props.user.id, token));
+  };
+
   render() {
+    console.log(
+      ":: RENDER OF CONTACTS FORM - CONTACT LIST IS ::" +
+        JSON.stringify(this.state.contacts)
+    );
+
+    if (!(this.state.contacts === undefined)) {
+      isRender = true;
+    } else {
+      isRender = false;
+    }
+    console.log(":: THE VALUE OF IS RENDER IS ::" + isRender);
     return (
       <div>
         <Nav isLoggedIn={this.props.isLoggedIn} />
@@ -54,9 +132,9 @@ class ContactsForm extends React.Component {
                   <input
                     className="form-input-contact"
                     type="text"
-                    name="first"
+                    name="contactFirst"
                     placeholder="First Name"
-                    value={this.state.newContact.first}
+                    value={this.state.newContact.contactFirst}
                     onChange={this.handleChanges}
                   />
                 </div>
@@ -65,9 +143,9 @@ class ContactsForm extends React.Component {
                   <input
                     className="form-input-contact"
                     type="text"
-                    name="last"
+                    name="contactLast"
                     placeholder="Last Name"
-                    value={this.state.newContact.last}
+                    value={this.state.newContact.contactLast}
                     onChange={this.handleChanges}
                   />
                 </div>
@@ -76,9 +154,9 @@ class ContactsForm extends React.Component {
                   <input
                     className="form-input-contact"
                     type="text"
-                    name="phone"
+                    name="contactPhone"
                     placeholder="Phone Number"
-                    value={this.state.newContact.phone}
+                    value={this.state.newContact.contactPhone}
                     onChange={this.handleChanges}
                   />
                 </div>
@@ -96,43 +174,34 @@ class ContactsForm extends React.Component {
               <div className="contact-heading2">Phone Number</div>
               <div className="contact-heading3" />
             </div>
-            {this.state.isEditable && (
-              <div className="right-section-contact-content">
-                <div className="contact-heading1a-content">
-                  {" "}
-                  <input type="text" value="Melissa" />{" "}
+
+            {isRender &&
+              this.state.contacts.map(contact => (
+                <div key={contact.id} className="right-section-contact-content">
+                  <div className="contact-heading1a-content">
+                    {contact.contactFirst}
+                  </div>
+                  <div className="contact-heading1b-content">
+                    {" "}
+                    {contact.contactLast}
+                  </div>
+                  <div className="contact-heading2-content">
+                    {contact.contactPhone}
+                  </div>
+                  <div className="contact-heading3-content">
+                    <img
+                      className="contact-form-img"
+                      src={Pencil}
+                      onClick={() => this.handleEditButton(contact.id)}
+                    />
+                    <img
+                      className="contact-form-img"
+                      src={Bin}
+                      onClick={() => this.handleDeleteButton(contact.id)}
+                    />
+                  </div>
                 </div>
-                <div className="contact-heading1b-content">
-                  {" "}
-                  <input type="text" value="Murphy" />
-                </div>
-                <div className="contact-heading2-content">
-                  <input type="text" value="123-234-4567" />
-                </div>
-                <div className="contact-heading3-content">
-                  <img
-                    className="contact-form-img"
-                    src={Save}
-                    onClick={this.handleEditButton}
-                  />
-                </div>
-              </div>
-            )}
-            {!this.state.isEditable && (
-              <div className="right-section-contact-content">
-                <div className="contact-heading1a-content"> Melissa </div>
-                <div className="contact-heading1b-content"> Murphy</div>
-                <div className="contact-heading2-content">123-234-4567</div>
-                <div className="contact-heading3-content">
-                  <img
-                    className="contact-form-img"
-                    src={Pencil}
-                    onClick={this.handleEditButton}
-                  />
-                  <img className="contact-form-img" src={Bin} />
-                </div>
-              </div>
-            )}
+              ))}
           </section>
         </div>
         <div className="login-filler" />
@@ -146,14 +215,46 @@ const mapStateToProps = state => {
   console.log(
     ":: CONTACTS FORM USER OBJECT IS ::" + JSON.stringify(state.user)
   );
+  console.log(
+    ":: CONTACTS FORM CONTACTS OBJECT IS ::" + JSON.stringify(state.contacts)
+  );
   return {
     user: state.user,
     isLoggedIn: state.isLoggedIn,
     loggingIn: state.loggingIn,
     error: state.error,
     contacts: state.contacts,
-    isEditable: false
+    isGettingContacts: state.isGettingContacts,
+    isUpdatingContacts: state.isUpdatingContacts,
+    isDeletingContacts: state.isDeletingContacts,
+    isAddingContacts: state.isAddingContacts
   };
 };
 
-export default connect(mapStateToProps)(ContactsForm);
+export default connect(
+  mapStateToProps,
+  { addContacts, getContacts, deleteContacts }
+)(ContactsForm);
+
+// {this.state.isEditable && (
+//   <div className="right-section-contact-content">
+//     <div className="contact-heading1a-content">
+//       {" "}
+//       <input type="text" value="Melissa" />{" "}
+//     </div>
+//     <div className="contact-heading1b-content">
+//       {" "}
+//       <input type="text" value="Murphy" />
+//     </div>
+//     <div className="contact-heading2-content">
+//       <input type="text" value="123-234-4567" />
+//     </div>
+//     <div className="contact-heading3-content">
+//       <img
+//         className="contact-form-img"
+//         src={Save}
+//         onClick={this.handleEditButton}
+//       />
+//     </div>
+//   </div>
+// )}

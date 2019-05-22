@@ -8,13 +8,14 @@ import ContactForm from "./ContactsForm";
 import RegistrationForm from "./RegistrationForm";
 import PrivateRoute from "./PrivateRoute";
 import { connect } from "react-redux";
-import { getData } from "../actions";
+import { getData, getContacts } from "../actions";
 
 import "../styles/index.css";
 
 class App extends React.Component {
   componentDidMount() {
     console.log(":: APP JS - COMPONENT DID MOUNT");
+    const token = localStorage.getItem("token");
     if (localStorage.getItem("data")) {
       this.props.getData(JSON.parse(localStorage.getItem("data")));
     }
@@ -35,5 +36,5 @@ class App extends React.Component {
 
 export default connect(
   null,
-  { getData }
+  { getData, getContacts }
 )(App);
