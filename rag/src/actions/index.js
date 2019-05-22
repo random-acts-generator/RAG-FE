@@ -88,3 +88,167 @@ export const updateUser = (newUser, token) => dispatch => {
       alert("Something is wrong, please try again");
     });
 };
+
+/* CRUD FOR CONTACTS*/
+
+export const GET_CONTACTS_START = "GET_CONTACTS_START";
+export const GET_CONTACTS_SUCCESS = "GET_CONTACTS_SUCCESS";
+export const GET_CONTACTS_FAILED = "GET_CONTACTS_FAILED";
+
+export const getContacts = (id, token) => dispatch => {
+  console.log(":: GET CONTACTS ACTION - ID IS " + id);
+  dispatch({ type: GET_CONTACTS_START });
+  return axios
+    .get(`${URL}/api/users/${id}/contacts`, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      console.log(
+        ":: GET CONTACT SUCCESS RESPONSE DATA IS :: " + JSON.stringify(res)
+      );
+      dispatch({ type: GET_CONTACTS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_CONTACTS_FAILED, payload: err.response });
+      alert("Something is wrong, please try again");
+    });
+};
+
+export const ADD_CONTACTS_START = "ADD_CONTACTS_START";
+export const ADD_CONTACTS_SUCCESS = "ADD_CONTACTS_SUCCESS";
+export const ADD_CONTACTS_FAILED = "ADD_CONTACTS_FAILED";
+
+export const addContacts = (newContact, token) => dispatch => {
+  dispatch({ type: ADD_CONTACTS_START });
+  return axios
+    .post(`${URL}/api/contacts/`, newContact, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      console.log(
+        ":: ADD CONTACTS - RESPONSE IS ::" + JSON.stringify(res.data)
+      );
+      dispatch({ type: ADD_CONTACTS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_CONTACTS_FAILED, payload: err.response });
+      alert("Something is wrong, please try again");
+    });
+};
+
+export const DELETE_CONTACTS_START = "DELETE_CONTACTS_START";
+export const DELETE_CONTACTS_SUCCESS = "DELETE_CONTACTS_SUCCESS";
+export const DELETE_CONTACTS_FAILED = "DELETE_CONTACTS_FAILED";
+
+export const deleteContacts = (contactId, token) => dispatch => {
+  dispatch({ type: DELETE_CONTACTS_START });
+  return axios
+    .delete(`${URL}/api/contacts/${contactId}`, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: DELETE_CONTACTS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_CONTACTS_FAILED, payload: err.response });
+      alert("Failed to delete project, please try again");
+    });
+};
+
+export const UPDATE_CONTACTS_START = "UPDATE_CONTACTS_START";
+export const UPDATE_CONTACTS_SUCCESS = "UPDATE_CONTACTS_SUCCESS";
+export const UPDATE_CONTACTS_FAILED = "UPDATE_CONTACTS_FAILED";
+
+export const updateContacts = (userId, contact, token) => dispatch => {
+  const user = localStorage.getItem("data");
+  dispatch({ type: UPDATE_CONTACTS_START });
+  return axios
+    .put(`${URL}/api/contacts/${userId}/${contact.id}`, contact, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: UPDATE_CONTACTS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_CONTACTS_FAILED, payload: err.response });
+      alert("Something is wrong, please try again");
+    });
+};
+
+/* CRUD FOR ACTS */
+export const GET_ACTS_START = "GET_ACTS_START";
+export const GET_ACTS_SUCCESS = "GET_ACTS_SUCCESS";
+export const GET_ACTS_FAILED = "GET_ACTS_FAILED";
+
+export const getActs = token => dispatch => {
+  dispatch({ type: GET_ACTS_START });
+  return axios
+    .get(`${URL}/api/acts/`, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: GET_ACTS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_ACTS_FAILED, payload: err.response });
+      alert("Something is wrong, please try again");
+    });
+};
+
+export const ADD_ACTS_START = "ADD_ACTS_START";
+export const ADD_ACTS_SUCCESS = "ADD_ACTS_SUCCESS";
+export const ADD_ACTS_FAILED = "ADD_ACTS_FAILED";
+
+export const addActs = (newAct, token) => dispatch => {
+  dispatch({ type: ADD_ACTS_START });
+  return axios
+    .post(`${URL}/api/acts/`, newAct, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: ADD_ACTS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_ACTS_FAILED, payload: err.response });
+      alert("Something is wrong, please try again");
+    });
+};
+
+export const DELETE_ACTS_START = "DELETE_ACTS_START";
+export const DELETE_ACTS_SUCCESS = "DELETE_ACTS_SUCCESS";
+export const DELETE_ACTS_FAILED = "DELETE_ACTS_FAILED";
+
+export const deleteActs = (actId, userId, token) => dispatch => {
+  dispatch({ type: DELETE_ACTS_START });
+  return axios
+    .delete(`${URL}/api/contacts/${userId}/${actId}`, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: DELETE_ACTS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_ACTS_FAILED, payload: err.response });
+      alert("Failed to delete project, please try again");
+    });
+};
+
+export const UPDATE_ACTS_START = "UPDATE_ACTS_START";
+export const UPDATE_ACTS_SUCCESS = "UPDATE_ACTS_SUCCESS";
+export const UPDATE_ACTS_FAILED = "UPDATE_ACTS_FAILED";
+
+export const updateActs = (userId, act, token) => dispatch => {
+  //const user = localStorage.getItem("data");
+  dispatch({ type: UPDATE_ACTS_START });
+  return axios
+    .put(`${URL}/api/acts/${userId}/${act.id}`, act, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: UPDATE_ACTS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_ACTS_FAILED, payload: err.response });
+      alert("Something is wrong, please try again");
+    });
+};
