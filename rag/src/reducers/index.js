@@ -44,8 +44,8 @@ const initialState = {
   loggingIn: false,
   registering: false,
   isLoggedIn: false,
-  contacts: {},
-  acts: {},
+  contacts: [],
+  acts: [],
   isGettingContacts: false,
   isUpdatingContacts: false,
   isDeletingContacts: false,
@@ -221,14 +221,16 @@ const reducer = (state = initialState, action) => {
         isAddingContacts: true
       };
     case ADD_CONTACTS_SUCCESS:
-      console.log(":: GET CONTACTS START ::" + JSON.stringify(action.payload));
       console.log(
-        ":: GET CONTACTS START - STATE CONTACTS::" +
+        ":: ADD CONTACTS SUCCESS ::" + JSON.stringify(action.payload)
+      );
+      console.log(
+        ":: ADD CONTACTS START - STATE CONTACTS::" +
           JSON.stringify(state.contacts)
       );
       return {
         ...state,
-        contacts: Object.assign({}, state.contacts, action.payload),
+        contacts: [...state.contacts, action.payload],
         error: "",
         isAddingContacts: false
       };

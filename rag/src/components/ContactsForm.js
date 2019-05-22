@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 class ContactsForm extends React.Component {
   constructor(props) {
     super(props);
-    let isRender;
+
     this.state = {
       newContact: {
         contactFirst: "",
@@ -31,32 +31,37 @@ class ContactsForm extends React.Component {
     console.log(":: IN COMPONENT DID MOUNT ::");
     const token = localStorage.getItem("token");
     //this.props.getContacts(this.props.user.id);
-    // this.props.getContacts(this.props.user.id, token);
-    // this.setState({ ...this.state, contacts: this.props.contacts });
+    this.props.getContacts(this.props.user.id, token).then(() => {
+      this.setState({ ...this.state, formContacts: this.props.contacts });
+    });
 
-    axios
-      .get(`${URL}/api/users/${this.props.user.id}/contacts`, {
-        headers: { Authorization: token }
-      })
-      .then(res => {
-        console.log(
-          ":: RESPONSE IN COMPONENT DID MOUNT IS ::" + JSON.stringify(res.data)
-        );
-        this.setState({
-          ...this.state,
-          contacts: res.data.account,
-          isLoading: false
-        });
-      })
-      .catch(err => {
-        alert("Something is wrong, please try again.");
-      });
+    // this.setState({ ...this.state, formContacts: this.props.contacts });
+
+    // axios
+    //   .get(`${URL}/api/users/${this.props.user.id}/contacts`, {
+    //     headers: { Authorization: token }
+    //   })
+    //   .then(res => {
+    //     console.log(
+    //       ":: RESPONSE IN COMPONENT DID MOUNT IS ::" + JSON.stringify(res.data)
+    //     );
+    //     this.setState({
+    //       ...this.state,
+    //       contacts: res.data.account,
+    //       isLoading: false
+    //     });
+    //   })
+    //   .catch(err => {
+    //     alert("Something is wrong, please try again.");
+    //   });
   }
 
   componentDidUpdate(prevProps) {
     console.log("prev", prevProps);
-    if (this.props.contacts !== prevProps.contacts) {
-      this.setState({ contacts: this.props.contacts });
+    if (this.props.contacts !== prevProps.formContacts) {
+      if (!this.props.isAddingContacts && !this.props.isGettingContacts) {
+        this.setState({ ...this.state, formContacts: this.props.contacts });
+      }
     }
   }
 
@@ -110,16 +115,29 @@ class ContactsForm extends React.Component {
 
   render() {
     console.log(
-      ":: RENDER OF CONTACTS FORM - CONTACT LIST IS ::" +
-        JSON.stringify(this.state.contacts)
+      ":: RENDER OF CONTACTS FORM - STATE CONTACT LIST IS ::" +
+        JSON.stringify(this.state.formContacts)
     );
 
-    if (!(this.state.contacts === undefined)) {
-      isRender = true;
-    } else {
+    console.log(
+      ":: RENDER OF CONTACTS FORM - PROP CONTACT LIST IS ::" +
+        JSON.stringify(this.props.contacts)
+    );
+    let isRender;
+    if (
+      this.state.formContacts === undefined ||
+      this.state.formContacts === null ||
+      (Object.entries(this.state.formContacts).length === 0 &&
+        this.state.formContacts.constructor === Object)
+    ) {
       isRender = false;
+      console.log(":: THE VALUE OF IS RENDER IS ::" + isRender);
+      return <div>Loading .... </div>;
+    } else {
+      isRender = true;
+      console.log(":: THE VALUE OF IS RENDER IS ::" + isRender);
     }
-    console.log(":: THE VALUE OF IS RENDER IS ::" + isRender);
+
     return (
       <div>
         <Nav isLoggedIn={this.props.isLoggedIn} />
@@ -176,7 +194,7 @@ class ContactsForm extends React.Component {
             </div>
 
             {isRender &&
-              this.state.contacts.map(contact => (
+              this.state.formContacts.map(contact => (
                 <div key={contact.id} className="right-section-contact-content">
                   <div className="contact-heading1a-content">
                     {contact.contactFirst}
