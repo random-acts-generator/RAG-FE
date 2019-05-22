@@ -58,8 +58,10 @@ class ContactsForm extends React.Component {
 
   componentDidUpdate(prevProps) {
     console.log("prev", prevProps);
-    if (this.props.contacts !== prevProps.formContacts) {
+    const token = localStorage.getItem("token");
+    if (this.props.contacts !== prevProps.contacts) {
       if (!this.props.isAddingContacts && !this.props.isGettingContacts) {
+        //this.props.getContacts(this.props.user.id, token);
         this.setState({ ...this.state, formContacts: this.props.contacts });
       }
     }
@@ -114,6 +116,12 @@ class ContactsForm extends React.Component {
   };
 
   render() {
+    if (this.props.isAddingContacts) {
+      return <div>Loading ...</div>;
+    }
+    if (this.props.isDeletingContacts) {
+      return <div>Loading ...</div>;
+    }
     console.log(
       ":: RENDER OF CONTACTS FORM - STATE CONTACT LIST IS ::" +
         JSON.stringify(this.state.formContacts)

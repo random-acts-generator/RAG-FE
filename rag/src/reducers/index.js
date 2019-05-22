@@ -259,7 +259,7 @@ const reducer = (state = initialState, action) => {
     case DELETE_CONTACTS_SUCCESS:
       return {
         ...state,
-        contacts: action.payload,
+        //contacts: action.payload,
         error: "",
         isDeletingContacts: false
       };
