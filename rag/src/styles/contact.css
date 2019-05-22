@@ -106,3 +106,39 @@ textarea {
   margin-left: 20%;
   cursor: pointer;
 }
+
+.contact-heading1a-content input[type="text"],
+textarea {
+  background-color: black;
+  border-radius: 5px;
+  border: 2px solid #1762a7;
+  width: 90%;
+  height: 30px;
+  font-size: 0.9rem;
+  color: white;
+  margin-top: 1%;
+}
+
+.contact-heading1b-content input[type="text"],
+textarea {
+  background-color: black;
+  border-radius: 5px;
+  border: 2px solid #1762a7;
+  width: 90%;
+  height: 30px;
+  font-size: 0.9rem;
+  color: white;
+  margin-top: 1%;
+}
+
+.contact-heading2-content input[type="text"],
+textarea {
+  background-color: black;
+  border-radius: 5px;
+  border: 2px solid #1762a7;
+  width: 90%;
+  height: 30px;
+  font-size: 0.9rem;
+  color: white;
+  margin-top: 1%;
+}

@@ -3,18 +3,23 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import Bin from "../assets/rag_pic_bin.png";
 import Pencil from "../assets/rag_pic_pencil.png";
+import Save from "../assets/rag_pic_save.png";
 import "../styles/contact.css";
 
 import { connect } from "react-redux";
 
 class ContactsForm extends React.Component {
-  state = {
-    newContact: {
-      first: "",
-      last: "",
-      phone: ""
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      newContact: {
+        first: "",
+        last: "",
+        phone: ""
+      },
+      isEditable: false
+    };
+  }
   handleChanges = e => {
     e.persist();
     this.setState({
@@ -27,6 +32,14 @@ class ContactsForm extends React.Component {
   onSubmit = e => {
     e.preventDefault();
     console.log(":: ON SUBMIT CLICKED IN CONTACT FORM ::");
+  };
+
+  handleEditButton = e => {
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      isEditable: true
+    });
   };
   render() {
     return (
@@ -83,16 +96,43 @@ class ContactsForm extends React.Component {
               <div className="contact-heading2">Phone Number</div>
               <div className="contact-heading3" />
             </div>
-            <div className="right-section-contact-content">
-              <div className="contact-heading1a-content"> Melissa </div>
-              <div className="contact-heading1b-content"> Murphy</div>
-              <div className="contact-heading2-content">123-234-4567</div>
-              <div className="contact-heading3-content">
-                <img className="contact-form-img" src={Pencil} />
-                <img className="contact-form-img" src={Bin} />
+            {this.state.isEditable && (
+              <div className="right-section-contact-content">
+                <div className="contact-heading1a-content">
+                  {" "}
+                  <input type="text" value="Melissa" />{" "}
+                </div>
+                <div className="contact-heading1b-content">
+                  {" "}
+                  <input type="text" value="Murphy" />
+                </div>
+                <div className="contact-heading2-content">
+                  <input type="text" value="123-234-4567" />
+                </div>
+                <div className="contact-heading3-content">
+                  <img
+                    className="contact-form-img"
+                    src={Save}
+                    onClick={this.handleEditButton}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="right-section-contact-content" />
+            )}
+            {!this.state.isEditable && (
+              <div className="right-section-contact-content">
+                <div className="contact-heading1a-content"> Melissa </div>
+                <div className="contact-heading1b-content"> Murphy</div>
+                <div className="contact-heading2-content">123-234-4567</div>
+                <div className="contact-heading3-content">
+                  <img
+                    className="contact-form-img"
+                    src={Pencil}
+                    onClick={this.handleEditButton}
+                  />
+                  <img className="contact-form-img" src={Bin} />
+                </div>
+              </div>
+            )}
           </section>
         </div>
         <div className="login-filler" />
@@ -111,7 +151,8 @@ const mapStateToProps = state => {
     isLoggedIn: state.isLoggedIn,
     loggingIn: state.loggingIn,
     error: state.error,
-    contacts: state.contacts
+    contacts: state.contacts,
+    isEditable: false
   };
 };
 
