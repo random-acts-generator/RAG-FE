@@ -42,8 +42,8 @@ textarea {
   background-color: black;
   border-radius: 5px;
   border: 2px solid #1762a7;
-  width: 400px;
-  height: 40px;
+  width: 89%;
+  height: 2.5rem;
   font-size: 0.9rem;
   color: white;
 }
@@ -61,8 +61,8 @@ input[type="password"],
 textarea {
   border-radius: 5px;
   border: 2px solid #1762a7;
-  width: 400px;
-  height: 40px;
+  width: 89%;
+  height: 2.5rem;
   font-size: 0.9rem;
   background-color: black;
   color: white;
@@ -73,16 +73,16 @@ textarea {
 }
 
 .login-btn {
-  width: 300px;
+  width: 80%;
   height: 35px;
   background: #1762a7;
   border-radius: 10px;
   text-align: center;
-  margin-top: 5%;
+  margin-top: 9%;
   margin-bottom: 5%;
   color: white;
   font-size: 1rem;
-  margin-left: 12%;
+  margin-left: 3%;
   border: none;
 }
 .form-text-register {

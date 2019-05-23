@@ -3,7 +3,7 @@ import "../styles/nav.css";
 import logo from "../assets/rag_pic_logo1xJustHelp.png";
 import { logout } from "../actions";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 class Nav extends React.Component {
   onLogout = e => {
@@ -16,8 +16,20 @@ class Nav extends React.Component {
       <div>
         <div className="nav-container">
           <div className="brand-logo">
-            <img className="logo" src={logo} alt="Brand logo" />
-            <div className="welcome-msg">Welcome, {this.props.user.first}</div>
+            {this.props.isLoggedIn && (
+              <Link to="/homepage">
+                <img className="logo" src={logo} alt="Brand logo" />
+              </Link>
+            )}
+            {!this.props.isLoggedIn && (
+              <a href="https://justhelp.netlify.com">
+                <img className="logo" src={logo} alt="Brand logo" />
+              </a>
+            )}
+
+            <div className="welcome-msg">
+              {this.props.isLoggedIn && `Welcome, ${this.props.user.first}`}
+            </div>
           </div>
           {this.props.isLoggedIn && (
             <div className="nav-links">
