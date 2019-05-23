@@ -3,13 +3,19 @@
 *::after {
   box-sizing: border-box;
 }
+html {
+  width: 100vw;
+  height: auto;
+}
 body {
   margin: 0;
   padding: 0;
   background-color: #332a2e;
   font-family: "Ruda", sans-serif;
   color: #eeeeee;
-  min-height: 100vh;
+  width: 100%;
+  height: auto;
+  border: 0px solid white;
 }
 
 .home-page-circle1 {

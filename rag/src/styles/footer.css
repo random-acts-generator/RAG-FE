@@ -5,6 +5,9 @@
   display: flex;
   margin-top: 20px;
   align-items: center;
+  position: absolute;
+  bottom: 0;
+  border: 0px solid white;
 }
 
 .footer-left {

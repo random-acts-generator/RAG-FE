@@ -1,15 +1,21 @@
 .nav-container {
   display: flex;
   border: 0px solid white;
+  position: relative;
+  top: 0;
+}
+.nav-subcontainer {
+  width: 100%;
+  border: 0px solid white;
 }
 
 .nav-links {
   display: flex;
-  width: 300px;
+  width: 400px;
   border: 0px solid white;
   flex-wrap: nowrap;
   align-items: center;
-  margin-left: 65%;
+  margin-left: 55%;
 }
 
 .nav-link {
@@ -37,7 +43,13 @@
   color: white;
   font-size: 0.9rem;
   text-align: right;
-  width: 100%;
+  width: 60%;
   margin-left: 15%;
   margin-bottom: 15%;
+  border: 0px solid white;
+}
+
+.brand-logo {
+  width: 20%;
+  border: 0px solid white;
 }
