@@ -5,14 +5,27 @@ import Bin from "../assets/rag_pic_bin.png";
 import Pencil from "../assets/rag_pic_pencil.png";
 import "../styles/kindacts.css";
 import { connect } from "react-redux";
+import { addActs, getActs, deleteActs, updateActs } from "../actions";
 
 class KindActsForm extends React.Component {
   state = {
     newAct: {
-      act: ""
+      description: "",
+      related: "Family",
+      actId: null
     }
   };
+
+  componentDidMount() {
+    console.log(":: IN COMPONENT DID MOUNT ::");
+    const token = localStorage.getItem("token");
+    this.props.getActs(this.props.user.id, token).then(() => {
+      this.setState({ ...this.state, formActs: this.props.acts });
+    });
+  }
+
   handleChanges = e => {
+    e.persist();
     this.setState({
       newAct: {
         ...this.state.newAct,
@@ -23,8 +36,73 @@ class KindActsForm extends React.Component {
   onSubmit = e => {
     e.preventDefault();
     console.log(":: ON SUBMIT CLICKED IN KIND ACTS ::");
+    const token = localStorage.getItem("token");
+    if (e.target.name === "add") {
+      this.props.addActs(this.state.newAct, token);
+    }
+    if (e.target.name === "update") {
+      // code for update
+      this.props
+        .updateActs(this.props.user.id, this.state.newAct, token)
+        .then(() => this.props.getActs(this.props.user.id, token));
+    }
+    this.setState({
+      newAct: {
+        description: "",
+        related: "famly",
+        actId: null
+      }
+    });
   };
+
+  handleEditButton = id => {
+    console.log("CALLING HANDLE EDIT BUTTON");
+    let updateAct = this.props.acts.filter(act => {
+      return act.id === id;
+    });
+    console.log(":: UPDATE ACT ::" + JSON.stringify(updateAct));
+    this.setState({
+      ...this.state,
+      newAct: {
+        description: updateAct[0].description,
+        related: "Friend",
+        actId: updateAct[0].id,
+        user_id: this.props.user.id
+      }
+    });
+  };
+
+  handleDeleteButton = id => {
+    const token = localStorage.getItem("token");
+    console.log(":: CALLING DELETE BUTTON IN CONTACT FORM ::" + id);
+    this.props
+      .deleteActs(id, token)
+      .then(() => this.props.getActs(this.props.user.id, token));
+  };
+
   render() {
+    if (this.props.isAddingActs) {
+      return <div>Loading ...</div>;
+    }
+    if (this.props.isDeletingActs) {
+      return <div>Loading ...</div>;
+    }
+    if (this.props.isUpdatingActs) {
+      return <div>Loading ...</div>;
+    }
+    if (this.props.isGettingActs) {
+      return <div>Loading ...</div>;
+    }
+    console.log(
+      ":: RENDER OF ACTS FORM - STATE ACT LIST IS ::" +
+        JSON.stringify(this.state.formActs)
+    );
+
+    console.log(
+      ":: RENDER OF ACTS FORM - PROP ACT LIST IS ::" +
+        JSON.stringify(this.props.acts)
+    );
+
     return (
       <div>
         <Nav isLoggedIn={this.props.isLoggedIn} />
@@ -37,16 +115,31 @@ class KindActsForm extends React.Component {
                   <input
                     className="form-input-kindact"
                     type="text"
-                    name="act"
+                    name="description"
                     placeholder="Enter a new act of kindness"
-                    value={this.state.newAct.act}
+                    value={this.state.newAct.description}
                     onChange={this.handleChanges}
                   />
                 </div>
 
-                <button className="kindact-btn" onClick={this.onSubmit}>
-                  Add a kind act
-                </button>
+                {!this.state.newAct.actId && (
+                  <button
+                    className="contact-btn"
+                    name="add"
+                    onClick={this.onSubmit}
+                  >
+                    Add Kind Act
+                  </button>
+                )}
+                {this.state.newAct.actId && (
+                  <button
+                    className="contact-btn-update"
+                    name="update"
+                    onClick={this.onSubmit}
+                  >
+                    Update Kind Act
+                  </button>
+                )}
               </form>
             </div>
           </section>
@@ -55,17 +148,26 @@ class KindActsForm extends React.Component {
               <div className="kindact-heading1">Act of kindness</div>
               <div className="kindact-heading3" />
             </div>
-            <div className="right-section-kindact-content">
-              <div className="kindact-heading1-content">
-                Help set up a lemonade stand in your community and involve
-                children to participate.
+
+            {this.props.acts.map(act => (
+              <div key={act.id} className="right-section-kindact-content">
+                <div className="kindact-heading1-content">
+                  {act.description}
+                </div>
+                <div className="kindact-heading3-content">
+                  <img
+                    className="kindact-form-img"
+                    src={Pencil}
+                    onClick={() => this.handleEditButton(act.id)}
+                  />
+                  <img
+                    className="kindact-form-img"
+                    src={Bin}
+                    onClick={() => this.handleDeleteButton(act.id)}
+                  />
+                </div>
               </div>
-              <div className="kindact-heading3-content">
-                <img className="kindact-form-img" src={Pencil} />
-                <img className="kindact-form-img" src={Bin} />
-              </div>
-            </div>
-            <div className="right-section-kindact-content" />
+            ))}
           </section>
         </div>
         <div className="login-filler" />
@@ -84,8 +186,15 @@ const mapStateToProps = state => {
     isLoggedIn: state.isLoggedIn,
     loggingIn: state.loggingIn,
     error: state.error,
-    acts: state.acts
+    acts: state.acts,
+    isGettingActs: state.isGettingActs,
+    isUpdatingActs: state.isUpdatingActs,
+    isDeletingActs: state.isDeletingActs,
+    isAddingActs: state.isAddingActs
   };
 };
 
-export default connect(null)(KindActsForm);
+export default connect(
+  mapStateToProps,
+  { addActs, getActs, deleteActs, updateActs }
+)(KindActsForm);

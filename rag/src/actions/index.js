@@ -163,7 +163,7 @@ export const updateContacts = (userId, contact, token) => dispatch => {
   const user = localStorage.getItem("data");
   dispatch({ type: UPDATE_CONTACTS_START });
   return axios
-    .put(`${URL}/api/contacts/${userId}/${contact.id}`, contact, {
+    .put(`${URL}/api/contacts/${contact.contactId}`, contact, {
       headers: { Authorization: token }
     })
     .then(res => {
@@ -180,10 +180,10 @@ export const GET_ACTS_START = "GET_ACTS_START";
 export const GET_ACTS_SUCCESS = "GET_ACTS_SUCCESS";
 export const GET_ACTS_FAILED = "GET_ACTS_FAILED";
 
-export const getActs = token => dispatch => {
+export const getActs = (id, token) => dispatch => {
   dispatch({ type: GET_ACTS_START });
   return axios
-    .get(`${URL}/api/acts/`, {
+    .get(`${URL}/api/acts`, {
       headers: { Authorization: token }
     })
     .then(res => {
@@ -218,10 +218,10 @@ export const DELETE_ACTS_START = "DELETE_ACTS_START";
 export const DELETE_ACTS_SUCCESS = "DELETE_ACTS_SUCCESS";
 export const DELETE_ACTS_FAILED = "DELETE_ACTS_FAILED";
 
-export const deleteActs = (actId, userId, token) => dispatch => {
+export const deleteActs = (actId, token) => dispatch => {
   dispatch({ type: DELETE_ACTS_START });
   return axios
-    .delete(`${URL}/api/contacts/${userId}/${actId}`, {
+    .delete(`${URL}/api/acts/${actId}`, {
       headers: { Authorization: token }
     })
     .then(res => {
@@ -241,7 +241,7 @@ export const updateActs = (userId, act, token) => dispatch => {
   //const user = localStorage.getItem("data");
   dispatch({ type: UPDATE_ACTS_START });
   return axios
-    .put(`${URL}/api/acts/${userId}/${act.id}`, act, {
+    .put(`${URL}/api/acts/${act.actId}`, act, {
       headers: { Authorization: token }
     })
     .then(res => {

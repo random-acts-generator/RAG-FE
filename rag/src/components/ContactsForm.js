@@ -5,8 +5,12 @@ import Bin from "../assets/rag_pic_bin.png";
 import Pencil from "../assets/rag_pic_pencil.png";
 import Save from "../assets/rag_pic_save.png";
 import "../styles/contact.css";
-import { addContacts, getContacts, URL, deleteContacts } from "../actions";
-import axios from "axios";
+import {
+  addContacts,
+  getContacts,
+  deleteContacts,
+  updateContacts
+} from "../actions";
 
 import { connect } from "react-redux";
 
@@ -30,38 +34,21 @@ class ContactsForm extends React.Component {
   componentDidMount() {
     console.log(":: IN COMPONENT DID MOUNT ::");
     const token = localStorage.getItem("token");
-    //this.props.getContacts(this.props.user.id);
     this.props.getContacts(this.props.user.id, token).then(() => {
       this.setState({ ...this.state, formContacts: this.props.contacts });
     });
-
-    // this.setState({ ...this.state, formContacts: this.props.contacts });
-
-    // axios
-    //   .get(`${URL}/api/users/${this.props.user.id}/contacts`, {
-    //     headers: { Authorization: token }
-    //   })
-    //   .then(res => {
-    //     console.log(
-    //       ":: RESPONSE IN COMPONENT DID MOUNT IS ::" + JSON.stringify(res.data)
-    //     );
-    //     this.setState({
-    //       ...this.state,
-    //       contacts: res.data.account,
-    //       isLoading: false
-    //     });
-    //   })
-    //   .catch(err => {
-    //     alert("Something is wrong, please try again.");
-    //   });
   }
 
   componentDidUpdate(prevProps) {
     console.log("prev", prevProps);
     const token = localStorage.getItem("token");
     if (this.props.contacts !== prevProps.contacts) {
-      if (!this.props.isAddingContacts && !this.props.isGettingContacts) {
-        //this.props.getContacts(this.props.user.id, token);
+      if (
+        !this.props.isAddingContacts &&
+        !this.props.isGettingContacts &&
+        !this.props.isUpdatingContacts &&
+        !this.props.isDeletingContacts
+      ) {
         this.setState({ ...this.state, formContacts: this.props.contacts });
       }
     }
@@ -86,7 +73,15 @@ class ContactsForm extends React.Component {
       ":: ON SUBMIT CLICKED IN CONTACT FORM ::",
       JSON.stringify(this.state.newContact)
     );
-    this.props.addContacts(this.state.newContact, token);
+    if (e.target.name === "add") {
+      this.props.addContacts(this.state.newContact, token);
+    }
+    if (e.target.name === "update") {
+      // code for update
+      this.props
+        .updateContacts(this.props.user.id, this.state.newContact, token)
+        .then(() => this.props.getContacts(this.props.user.id, token));
+    }
 
     this.setState({
       newContact: {
@@ -94,16 +89,28 @@ class ContactsForm extends React.Component {
         contactLast: "",
         contactPhone: "",
         relation: "map",
+        contactId: null,
         user_id: this.props.user.id
       }
     });
   };
 
-  handleEditButton = e => {
-    e.preventDefault();
+  handleEditButton = id => {
+    console.log("CALLING HANDLE EDIT BUTTON");
+    let updateContact = this.props.contacts.filter(contact => {
+      return contact.id === id;
+    });
+    console.log(":: UPDATE CONTACT ::" + JSON.stringify(updateContact));
     this.setState({
       ...this.state,
-      isEditable: true
+      newContact: {
+        contactFirst: updateContact[0].contactFirst,
+        contactLast: updateContact[0].contactLast,
+        contactPhone: updateContact[0].contactPhone,
+        relation: "map",
+        user_id: this.props.user.id,
+        contactId: updateContact[0].id
+      }
     });
   };
 
@@ -120,6 +127,12 @@ class ContactsForm extends React.Component {
       return <div>Loading ...</div>;
     }
     if (this.props.isDeletingContacts) {
+      return <div>Loading ...</div>;
+    }
+    if (this.props.isUpdatingContacts) {
+      return <div>Loading ...</div>;
+    }
+    if (this.props.isGettingContacts) {
       return <div>Loading ...</div>;
     }
     console.log(
@@ -186,10 +199,24 @@ class ContactsForm extends React.Component {
                     onChange={this.handleChanges}
                   />
                 </div>
-
-                <button className="contact-btn" onClick={this.onSubmit}>
-                  Add Contact
-                </button>
+                {!this.state.newContact.contactId && (
+                  <button
+                    className="contact-btn"
+                    name="add"
+                    onClick={this.onSubmit}
+                  >
+                    Add Contact
+                  </button>
+                )}
+                {this.state.newContact.contactId && (
+                  <button
+                    className="contact-btn-update"
+                    name="update"
+                    onClick={this.onSubmit}
+                  >
+                    Update Contact
+                  </button>
+                )}
               </form>
             </div>
           </section>
@@ -259,7 +286,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addContacts, getContacts, deleteContacts }
+  { addContacts, getContacts, deleteContacts, updateContacts }
 )(ContactsForm);
 
 // {this.state.isEditable && (

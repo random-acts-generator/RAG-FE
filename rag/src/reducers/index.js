@@ -49,7 +49,11 @@ const initialState = {
   isGettingContacts: false,
   isUpdatingContacts: false,
   isDeletingContacts: false,
-  isAddingContacts: false
+  isAddingContacts: false,
+  isGettingActs: false,
+  isUpdatingActs: false,
+  isDeletingActs: false,
+  isAddingActs: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -147,7 +151,7 @@ const reducer = (state = initialState, action) => {
       console.log(":: GET ACTS FAILED ::");
       return {
         ...state,
-        gettingActs: false,
+        isGettingActs: false,
         error: action.payload
       };
     case GET_ACTS_SUCCESS:
@@ -155,14 +159,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         acts: action.payload,
-        gettingActs: false,
+        isGettingActs: false,
         error: ""
       };
     case GET_ACTS_START:
       console.log(":: GET ACTS START ::");
       return {
         ...state,
-        gettingActs: true,
+        isGettingActs: true,
         error: ""
       };
     case GET_CONTACTS_FAILED:
@@ -191,20 +195,23 @@ const reducer = (state = initialState, action) => {
       console.log(":: ADD ACTS FAILED ::");
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        isAddingActs: false
       };
     case ADD_ACTS_START:
       console.log(":: ADD ACTS START ::");
       return {
         ...state,
-        error: ""
+        error: "",
+        isAddingActs: true
       };
     case ADD_ACTS_SUCCESS:
       console.log(":: ADD ACTS START ::");
       return {
         ...state,
-        acts: action.payload,
-        error: ""
+        acts: [...state.acts, action.payload],
+        error: "",
+        isAddingActs: false
       };
     case ADD_CONTACTS_FAILED:
       console.log(":: ADD CONTACTS FAILED ::");
@@ -237,18 +244,20 @@ const reducer = (state = initialState, action) => {
     case DELETE_ACTS_START:
       return {
         ...state,
-        error: ""
+        error: "",
+        isDeletingActs: true
       };
     case DELETE_ACTS_SUCCESS:
       return {
         ...state,
-        acts: action.payload,
-        error: ""
+        error: "",
+        isDeletingActs: false
       };
     case DELETE_ACTS_FAILED:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        isDeletingActs: false
       };
     case DELETE_CONTACTS_START:
       return {
@@ -272,18 +281,20 @@ const reducer = (state = initialState, action) => {
     case UPDATE_ACTS_START:
       return {
         ...state,
-        error: ""
+        error: "",
+        isUpdatingActs: true
       };
     case UPDATE_ACTS_SUCCESS:
       return {
         ...state,
-        acts: action.payload,
-        error: ""
+        error: "",
+        isUpdatingActs: false
       };
     case UPDATE_ACTS_FAILED:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        isUpdatingActs: false
       };
     case UPDATE_CONTACTS_START:
       return {
@@ -294,7 +305,6 @@ const reducer = (state = initialState, action) => {
     case UPDATE_CONTACTS_SUCCESS:
       return {
         ...state,
-        contacts: action.payload,
         error: "",
         isUpdatingContacts: false
       };

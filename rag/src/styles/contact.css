@@ -142,3 +142,17 @@ textarea {
   color: white;
   margin-top: 1%;
 }
+
+.contact-btn-update {
+  width: 150px;
+  height: 35px;
+  background: #1762a7;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  color: white;
+  font-size: 0.8rem;
+  border: none;
+  cursor: pointer;
+}
