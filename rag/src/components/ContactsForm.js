@@ -122,6 +122,20 @@ class ContactsForm extends React.Component {
       .then(() => this.props.getContacts(this.props.user.id, token));
   };
 
+  handleCancelClick = e => {
+    e.preventDefault();
+    this.setState({
+      newContact: {
+        contactFirst: "",
+        contactLast: "",
+        contactPhone: "",
+        relation: "map",
+        contactId: null,
+        user_id: this.props.user.id
+      }
+    });
+  };
+
   render() {
     if (this.props.isAddingContacts) {
       return <div>Loading ...</div>;
@@ -217,6 +231,13 @@ class ContactsForm extends React.Component {
                     Update Contact
                   </button>
                 )}
+                <button
+                  className="contact-btn"
+                  name="cancel"
+                  onClick={this.handleCancelClick}
+                >
+                  Cancel
+                </button>
               </form>
             </div>
           </section>

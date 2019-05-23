@@ -30,6 +30,8 @@ textarea {
   font-size: 0.8rem;
   border: none;
   cursor: pointer;
+  margin-left: 1%;
+  margin-right: 4%;
 }
 
 .form-element-contact {
