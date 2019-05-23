@@ -12,7 +12,8 @@ class KindActsForm extends React.Component {
     newAct: {
       description: "",
       related: "Family",
-      actId: null
+      actId: null,
+      user_id: this.props.user.id
     }
   };
 
@@ -50,7 +51,8 @@ class KindActsForm extends React.Component {
       newAct: {
         description: "",
         related: "famly",
-        actId: null
+        actId: null,
+        user_id: this.props.user.id
       }
     });
   };
