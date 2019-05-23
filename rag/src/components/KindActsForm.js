@@ -73,11 +73,28 @@ class KindActsForm extends React.Component {
   };
 
   handleDeleteButton = id => {
-    const token = localStorage.getItem("token");
-    console.log(":: CALLING DELETE BUTTON IN CONTACT FORM ::" + id);
-    this.props
-      .deleteActs(id, token)
-      .then(() => this.props.getActs(this.props.user.id, token));
+    var userResponse = window.confirm(
+      "Do you want to delete this act?",
+      "Please Confirm"
+    );
+    if (userResponse) {
+      const token = localStorage.getItem("token");
+      console.log(":: CALLING DELETE BUTTON IN CONTACT FORM ::" + id);
+      this.props
+        .deleteActs(id, token)
+        .then(() => this.props.getActs(this.props.user.id, token));
+    }
+  };
+
+  handleCancelClick = e => {
+    e.preventDefault();
+    this.setState({
+      newAct: {
+        description: "",
+        related: "famly",
+        actId: null
+      }
+    });
   };
 
   render() {
@@ -140,6 +157,13 @@ class KindActsForm extends React.Component {
                     Update Kind Act
                   </button>
                 )}
+                <button
+                  className="contact-btn"
+                  name="cancel"
+                  onClick={this.handleCancelClick}
+                >
+                  Cancel
+                </button>
               </form>
             </div>
           </section>

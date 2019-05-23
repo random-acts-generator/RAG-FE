@@ -115,11 +115,18 @@ class ContactsForm extends React.Component {
   };
 
   handleDeleteButton = id => {
-    const token = localStorage.getItem("token");
-    console.log(":: CALLING DELETE BUTTON IN CONTACT FORM ::" + id);
-    this.props
-      .deleteContacts(id, token)
-      .then(() => this.props.getContacts(this.props.user.id, token));
+    var userResponse = window.confirm(
+      "Do you want to delete this act?",
+      "Please Confirm"
+    );
+
+    if (userResponse) {
+      const token = localStorage.getItem("token");
+      console.log(":: CALLING DELETE BUTTON IN CONTACT FORM ::" + id);
+      this.props
+        .deleteContacts(id, token)
+        .then(() => this.props.getContacts(this.props.user.id, token));
+    }
   };
 
   handleCancelClick = e => {
@@ -309,26 +316,3 @@ export default connect(
   mapStateToProps,
   { addContacts, getContacts, deleteContacts, updateContacts }
 )(ContactsForm);
-
-// {this.state.isEditable && (
-//   <div className="right-section-contact-content">
-//     <div className="contact-heading1a-content">
-//       {" "}
-//       <input type="text" value="Melissa" />{" "}
-//     </div>
-//     <div className="contact-heading1b-content">
-//       {" "}
-//       <input type="text" value="Murphy" />
-//     </div>
-//     <div className="contact-heading2-content">
-//       <input type="text" value="123-234-4567" />
-//     </div>
-//     <div className="contact-heading3-content">
-//       <img
-//         className="contact-form-img"
-//         src={Save}
-//         onClick={this.handleEditButton}
-//       />
-//     </div>
-//   </div>
-// )}
