@@ -121,7 +121,7 @@ export const ADD_CONTACTS_FAILED = "ADD_CONTACTS_FAILED";
 export const addContacts = (newContact, token) => dispatch => {
   dispatch({ type: ADD_CONTACTS_START });
   return axios
-    .post(`${URL}/api/contacts/`, newContact, {
+    .post(`${URL}/api/contacts`, newContact, {
       headers: { Authorization: token }
     })
     .then(res => {
@@ -183,7 +183,7 @@ export const GET_ACTS_FAILED = "GET_ACTS_FAILED";
 export const getActs = (id, token) => dispatch => {
   dispatch({ type: GET_ACTS_START });
   return axios
-    .get(`${URL}/api/acts`, {
+    .get(`${URL}/api/users/${id}/acts`, {
       headers: { Authorization: token }
     })
     .then(res => {

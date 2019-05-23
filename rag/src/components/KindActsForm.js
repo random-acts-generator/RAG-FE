@@ -12,7 +12,8 @@ class KindActsForm extends React.Component {
     newAct: {
       description: "",
       related: "Family",
-      actId: null
+      actId: null,
+      user_id: this.props.user.id
     }
   };
 
@@ -50,7 +51,8 @@ class KindActsForm extends React.Component {
       newAct: {
         description: "",
         related: "famly",
-        actId: null
+        actId: null,
+        user_id: this.props.user.id
       }
     });
   };
@@ -119,6 +121,20 @@ class KindActsForm extends React.Component {
       ":: RENDER OF ACTS FORM - PROP ACT LIST IS ::" +
         JSON.stringify(this.props.acts)
     );
+    let isRender;
+    if (
+      this.state.formActs === undefined ||
+      this.state.formActs === null ||
+      (Object.entries(this.state.formActs).length === 0 &&
+        this.state.formActs.constructor === Object)
+    ) {
+      isRender = false;
+      console.log(":: THE VALUE OF IS RENDER IS ::" + isRender);
+      return <div>Loading .... </div>;
+    } else {
+      isRender = true;
+      console.log(":: THE VALUE OF IS RENDER IS ::" + isRender);
+    }
 
     return (
       <div>
@@ -173,25 +189,26 @@ class KindActsForm extends React.Component {
               <div className="kindact-heading3" />
             </div>
 
-            {this.props.acts.map(act => (
-              <div key={act.id} className="right-section-kindact-content">
-                <div className="kindact-heading1-content">
-                  {act.description}
+            {isRender &&
+              this.props.acts.map(act => (
+                <div key={act.id} className="right-section-kindact-content">
+                  <div className="kindact-heading1-content">
+                    {act.description}
+                  </div>
+                  <div className="kindact-heading3-content">
+                    <img
+                      className="kindact-form-img"
+                      src={Pencil}
+                      onClick={() => this.handleEditButton(act.id)}
+                    />
+                    <img
+                      className="kindact-form-img"
+                      src={Bin}
+                      onClick={() => this.handleDeleteButton(act.id)}
+                    />
+                  </div>
                 </div>
-                <div className="kindact-heading3-content">
-                  <img
-                    className="kindact-form-img"
-                    src={Pencil}
-                    onClick={() => this.handleEditButton(act.id)}
-                  />
-                  <img
-                    className="kindact-form-img"
-                    src={Bin}
-                    onClick={() => this.handleDeleteButton(act.id)}
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
           </section>
         </div>
         <div className="login-filler" />
