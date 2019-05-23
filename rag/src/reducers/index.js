@@ -158,7 +158,7 @@ const reducer = (state = initialState, action) => {
       console.log(":: GET ACTS SUCCESS ::");
       return {
         ...state,
-        acts: action.payload,
+        acts: action.payload.acts,
         isGettingActs: false,
         error: ""
       };
@@ -180,7 +180,7 @@ const reducer = (state = initialState, action) => {
       console.log(":: GET CONTACTS SUCCESS ::");
       return {
         ...state,
-        contacts: action.payload.account,
+        contacts: action.payload.contacts,
         isGettingContacts: false,
         error: ""
       };
