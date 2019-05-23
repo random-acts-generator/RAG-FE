@@ -19,3 +19,8 @@
   width: 80%;
   text-align: right;
 }
+
+a {
+  text-decoration: none;
+  color: white;
+}
