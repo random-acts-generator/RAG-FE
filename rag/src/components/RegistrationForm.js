@@ -43,6 +43,10 @@ class RegistrationForm extends React.Component {
   };
 
   render() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.props.history.push("/homepage");
+    }
     return (
       <div>
         <Nav isLoggedIn={false} />
