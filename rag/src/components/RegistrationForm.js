@@ -43,90 +43,94 @@ class RegistrationForm extends React.Component {
   };
 
   render() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      this.props.history.push("/homepage");
-    }
+    // const token = localStorage.getItem("token");
+    // if (token) {
+    //   this.props.history.push("/homepage");
+    // }
     return (
       <div>
         <Nav isLoggedIn={false} />
         <div className="body-container">
-          <section className="left-section">
-            <img className="left-image" src={SayHello} alt="Say Hello" />
-            <img className="left-image-text" src={Kindness} alt="Kindness" />
-            <img className="left-image" src={TitlePic} alt="Title picture" />
-          </section>
-          <section className="right-section">
-            <p>
-              Get started by creating your account, or{" "}
-              <Link className="link-register" to="/login">
-                logging in
-              </Link>{" "}
-              if you already have one.
-            </p>
-            <div className="right-section-container-register">
-              <form onSubmit={this.onSubmit}>
-                <div className="form-text-register">First Name</div>
-                <div className="form-element">
-                  <input
-                    className="form-input-register"
-                    type="text"
-                    name="first"
-                    placeholder="First Name"
-                    value={this.state.credentials.first}
-                    onChange={this.handleChanges}
-                  />
-                </div>
-                <div className="form-text-register">Last Name</div>
-                <div className="form-element">
-                  <input
-                    className="form-input-register"
-                    type="text"
-                    name="last"
-                    placeholder="Last Name"
-                    value={this.state.credentials.last}
-                    onChange={this.handleChanges}
-                  />
-                </div>
-                <div className="form-text-register">Email</div>
-                <div className="form-element">
-                  <input
-                    className="form-input-register"
-                    type="text"
-                    name="email"
-                    placeholder="Email Address"
-                    value={this.state.credentials.email}
-                    onChange={this.handleChanges}
-                  />
-                </div>
-                <div className="form-text-register">Phone Number</div>
-                <div className="form-element">
-                  <input
-                    className="form-input-register"
-                    type="text"
-                    name="phone"
-                    placeholder="Phone Number"
-                    value={this.state.credentials.phone}
-                    onChange={this.handleChanges}
-                  />
-                </div>
-                <div className="form-text-register">Password</div>
-                <div className="form-element">
-                  <input
-                    className="form-input-register"
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={this.state.credentials.password}
-                    onChange={this.handleChanges}
-                  />
-                  <button className="login-btn" onClick={this.onSubmit}>
-                    Join Now
-                  </button>
-                </div>
-              </form>
-            </div>
-          </section>
+          <div className="content-container">
+            <section className="left-section">
+              <img className="left-image" src={SayHello} alt="Say Hello" />
+              <img className="left-image-text" src={Kindness} alt="Kindness" />
+              <img className="left-image" src={TitlePic} alt="Title picture" />
+            </section>
+            <section className="middle-section" />
+            <section className="right-section">
+              <p>
+                Get started by creating your account, or{" "}
+                <Link className="link-register" to="/login">
+                  logging in
+                </Link>{" "}
+                if you already have one.
+              </p>
+              <div className="right-section-container-register">
+                <form onSubmit={this.onSubmit}>
+                  <div className="form-text-register">First Name</div>
+                  <div className="form-element">
+                    <input
+                      className="form-input-register"
+                      type="text"
+                      name="first"
+                      placeholder="First Name"
+                      value={this.state.credentials.first}
+                      onChange={this.handleChanges}
+                    />
+                  </div>
+
+                  <div className="form-text-register">Last Name</div>
+                  <div className="form-element">
+                    <input
+                      className="form-input-register"
+                      type="text"
+                      name="last"
+                      placeholder="Last Name"
+                      value={this.state.credentials.last}
+                      onChange={this.handleChanges}
+                    />
+                  </div>
+                  <div className="form-text-register">Email</div>
+                  <div className="form-element">
+                    <input
+                      className="form-input-register"
+                      type="text"
+                      name="email"
+                      placeholder="Email Address"
+                      value={this.state.credentials.email}
+                      onChange={this.handleChanges}
+                    />
+                  </div>
+                  <div className="form-text-register">Phone Number</div>
+                  <div className="form-element">
+                    <input
+                      className="form-input-register"
+                      type="text"
+                      name="phone"
+                      placeholder="Phone Number"
+                      value={this.state.credentials.phone}
+                      onChange={this.handleChanges}
+                    />
+                  </div>
+                  <div className="form-text-register">Password</div>
+                  <div className="form-element">
+                    <input
+                      className="form-input-register"
+                      type="password"
+                      name="password"
+                      placeholder="Password"
+                      value={this.state.credentials.password}
+                      onChange={this.handleChanges}
+                    />
+                    <button className="login-btn" onClick={this.onSubmit}>
+                      Join Now
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </section>
+          </div>
         </div>
         <div className="login-filler" />
         <Footer />

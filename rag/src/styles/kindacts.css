@@ -1,8 +1,18 @@
 .left-section-container-kindact {
-  height: 200px;
-  width: 70%;
+  padding-top: 5%;
+  height: 15rem;
+  width: 110%;
   background-color: black;
   border-radius: 10px;
+}
+.kindacts-content-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  border: 0px solid white;
 }
 
 .form-element-kindact input[type="text"],
@@ -17,20 +27,6 @@ textarea {
   color: white;
   margin-top: 1%;
   text-align: left;
-}
-
-.kindact-btn {
-  width: 100px;
-  height: 35px;
-  background: #1762a7;
-  border-radius: 10px;
-  text-align: center;
-  margin-top: 10%;
-  margin-bottom: 5%;
-  color: white;
-  font-size: 0.8rem;
-  border: none;
-  cursor: pointer;
 }
 
 .form-element-kindact {
@@ -48,8 +44,7 @@ textarea {
 }
 
 .right-section-kindact {
-  width: 50%;
-  margin-left: 10%;
+  width: 70%;
   border: 0px solid white;
   height: 100%;
 }
@@ -61,11 +56,11 @@ textarea {
   height: 30px;
 }
 .kindact-heading1 {
-  width: 80%;
+  width: 70%;
 }
 
 .kindact-heading3 {
-  width: 20%;
+  width: 30%;
 }
 
 .right-section-kindact-content {
@@ -79,13 +74,13 @@ textarea {
 }
 
 .kindact-heading1-content {
-  width: 80%;
+  width: 70%;
   height: 20px;
   overflow: hidden;
 }
 
 .kindact-heading3-content {
-  width: 20%;
+  width: 30%;
   border: 0px solid white;
 }
 

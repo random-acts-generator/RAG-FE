@@ -45,10 +45,10 @@ class LoginForm extends React.Component {
     });
   };
   render() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      this.props.history.push("/homepage");
-    }
+    // const token = localStorage.getItem("token");
+    // if (token) {
+    //   this.props.history.push("/homepage");
+    // }
     return (
       <div>
         <Nav isLoggedIn={false} />
@@ -60,14 +60,15 @@ class LoginForm extends React.Component {
               alt="Be The Change"
             />
           </section>
+          <section className="middle-section" />
           <section className="right-section">
-            <p>
+            <span className="login-text">
               Sign in below to access your "justhelp" page. Don't have an
               account yet?{" "}
               <Link className="link-register" to="/">
                 Create one here.
               </Link>
-            </p>
+            </span>
 
             <div className="right-section-container-login">
               <form onSubmit={this.onLogin} autoComplete="false">

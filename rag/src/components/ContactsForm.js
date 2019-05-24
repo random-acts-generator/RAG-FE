@@ -184,106 +184,112 @@ class ContactsForm extends React.Component {
       <div>
         <Nav isLoggedIn={this.props.isLoggedIn} />
         <div className="body-container">
-          <section className="left-section">
-            <div className="left-section-container-contact ">
-              <form onSubmit={this.onSubmit}>
-                <div className="form-text-contact">First Name</div>
-                <div className="form-element-contact">
-                  <input
-                    className="form-input-contact"
-                    type="text"
-                    name="contactFirst"
-                    placeholder="First Name"
-                    value={this.state.newContact.contactFirst}
-                    onChange={this.handleChanges}
-                  />
-                </div>
-                <div className="form-text-contact">Last Name</div>
-                <div className="form-element-contact">
-                  <input
-                    className="form-input-contact"
-                    type="text"
-                    name="contactLast"
-                    placeholder="Last Name"
-                    value={this.state.newContact.contactLast}
-                    onChange={this.handleChanges}
-                  />
-                </div>
-                <div className="form-text-contact">Phone Number</div>
-                <div className="form-element-contact">
-                  <input
-                    className="form-input-contact"
-                    type="text"
-                    name="contactPhone"
-                    placeholder="Phone Number"
-                    value={this.state.newContact.contactPhone}
-                    onChange={this.handleChanges}
-                  />
-                </div>
-                {!this.state.newContact.contactId && (
+          <div className="contacts-content-container">
+            <section className="left-section">
+              <div className="left-section-container-contact ">
+                <form onSubmit={this.onSubmit}>
+                  <div className="form-text-contact">First Name</div>
+                  <div className="form-element-contact">
+                    <input
+                      className="form-input-contact"
+                      type="text"
+                      name="contactFirst"
+                      placeholder="First Name"
+                      value={this.state.newContact.contactFirst}
+                      onChange={this.handleChanges}
+                    />
+                  </div>
+                  <div className="form-text-contact">Last Name</div>
+                  <div className="form-element-contact">
+                    <input
+                      className="form-input-contact"
+                      type="text"
+                      name="contactLast"
+                      placeholder="Last Name"
+                      value={this.state.newContact.contactLast}
+                      onChange={this.handleChanges}
+                    />
+                  </div>
+                  <div className="form-text-contact">Phone Number</div>
+                  <div className="form-element-contact">
+                    <input
+                      className="form-input-contact"
+                      type="text"
+                      name="contactPhone"
+                      placeholder="Phone Number"
+                      value={this.state.newContact.contactPhone}
+                      onChange={this.handleChanges}
+                    />
+                  </div>
+                  {!this.state.newContact.contactId && (
+                    <button
+                      className="contact-btn"
+                      name="add"
+                      onClick={this.onSubmit}
+                    >
+                      Add Contact
+                    </button>
+                  )}
+                  {this.state.newContact.contactId && (
+                    <button
+                      className="contact-btn-update"
+                      name="update"
+                      onClick={this.onSubmit}
+                    >
+                      Update Contact
+                    </button>
+                  )}
                   <button
                     className="contact-btn"
-                    name="add"
-                    onClick={this.onSubmit}
+                    name="cancel"
+                    onClick={this.handleCancelClick}
                   >
-                    Add Contact
+                    Cancel
                   </button>
-                )}
-                {this.state.newContact.contactId && (
-                  <button
-                    className="contact-btn-update"
-                    name="update"
-                    onClick={this.onSubmit}
-                  >
-                    Update Contact
-                  </button>
-                )}
-                <button
-                  className="contact-btn"
-                  name="cancel"
-                  onClick={this.handleCancelClick}
-                >
-                  Cancel
-                </button>
-              </form>
-            </div>
-          </section>
-          <section className="right-section-contact">
-            <div className="right-section-contact-heading">
-              <div className="contact-heading1a">First Name</div>
-              <div className="contact-heading1b">Last Name</div>
-              <div className="contact-heading2">Phone Number</div>
-              <div className="contact-heading3" />
-            </div>
+                </form>
+              </div>
+            </section>
+            <section className="middle-section" />
+            <section className="right-section-contact">
+              <div className="right-section-contact-heading">
+                <div className="contact-heading1a">First Name</div>
+                <div className="contact-heading1b">Last Name</div>
+                <div className="contact-heading2">Phone Number</div>
+                <div className="contact-heading3" />
+              </div>
 
-            {isRender &&
-              this.state.formContacts.map(contact => (
-                <div key={contact.id} className="right-section-contact-content">
-                  <div className="contact-heading1a-content">
-                    {contact.contactFirst}
+              {isRender &&
+                this.state.formContacts.map(contact => (
+                  <div
+                    key={contact.id}
+                    className="right-section-contact-content"
+                  >
+                    <div className="contact-heading1a-content">
+                      {contact.contactFirst}
+                    </div>
+                    <div className="contact-heading1b-content">
+                      {" "}
+                      {contact.contactLast}
+                    </div>
+                    <div className="contact-heading2-content">
+                      {contact.contactPhone}
+                    </div>
+                    <div className="contact-heading3-content">
+                      <img
+                        className="contact-form-img"
+                        src={Pencil}
+                        onClick={() => this.handleEditButton(contact.id)}
+                      />
+                      <img
+                        className="contact-form-img"
+                        src={Bin}
+                        onClick={() => this.handleDeleteButton(contact.id)}
+                      />
+                    </div>
                   </div>
-                  <div className="contact-heading1b-content">
-                    {" "}
-                    {contact.contactLast}
-                  </div>
-                  <div className="contact-heading2-content">
-                    {contact.contactPhone}
-                  </div>
-                  <div className="contact-heading3-content">
-                    <img
-                      className="contact-form-img"
-                      src={Pencil}
-                      onClick={() => this.handleEditButton(contact.id)}
-                    />
-                    <img
-                      className="contact-form-img"
-                      src={Bin}
-                      onClick={() => this.handleDeleteButton(contact.id)}
-                    />
-                  </div>
-                </div>
-              ))}
-          </section>
+                ))}
+            </section>
+          </div>
         </div>
         <div className="login-filler" />
         <Footer />

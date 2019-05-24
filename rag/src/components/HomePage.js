@@ -70,6 +70,7 @@ class HomePage extends React.Component {
           <section className="left-section">
             <img className="left-image" src={LeftImage} alt="Fireworks" />
           </section>
+          <section className="middle-section" />
           <section className="right-section">
             <div>
               <div className="right-section-content">

@@ -15,43 +15,44 @@ class Nav extends React.Component {
     return (
       <div>
         <div className="nav-container">
-          <div className="brand-logo">
-            {this.props.isLoggedIn && (
-              <Link to="/homepage">
-                <img className="logo" src={logo} alt="Brand logo" />
-              </Link>
-            )}
-            {!this.props.isLoggedIn && (
-              <a href="https://justhelp.netlify.com">
-                <img className="logo" src={logo} alt="Brand logo" />
-              </a>
-            )}
+          <div className="nav-subcontainer">
+            <div className="brand-logo">
+              {this.props.isLoggedIn && (
+                <Link to="/homepage">
+                  <img className="logo" src={logo} alt="Brand logo" />
+                </Link>
+              )}
+              {!this.props.isLoggedIn && (
+                <a href="https://justhelp.netlify.com">
+                  <img className="logo" src={logo} alt="Brand logo" />
+                </a>
+              )}
 
-            <div className="welcome-msg">
-              {this.props.isLoggedIn && `Welcome, ${this.props.user.first}`}
-            </div>
-          </div>
-          {this.props.isLoggedIn && (
-            <div className="nav-links">
-              <NavLink to="/contacts" className="nav-link">
-                Contacts
-              </NavLink>
-              <NavLink to="/acts" className="nav-link">
-                Kind Acts
-              </NavLink>
-              <NavLink to="/profile" className="nav-link">
-                Profile
-              </NavLink>
-              <div className="nav-link" onClick={this.onLogout}>
-                Logout
+              <div className="welcome-msg">
+                {this.props.isLoggedIn && `Welcome, ${this.props.user.first}`}
               </div>
             </div>
-          )}
+            {this.props.isLoggedIn && (
+              <div className="nav-links">
+                <NavLink to="/contacts" className="nav-link">
+                  Contacts
+                </NavLink>
+                <NavLink to="/acts" className="nav-link">
+                  Kind Acts
+                </NavLink>
+                <NavLink to="/profile" className="nav-link">
+                  Profile
+                </NavLink>
+                <div className="nav-link" onClick={this.onLogout}>
+                  Logout
+                </div>
+              </div>
+            )}
+          </div>
         </div>
         <div className="home-page-circle1" />
         <div className="home-page-circle2" />
         <div className="home-page-circle3" />
-        <div className="divider" />
       </div>
     );
   }
