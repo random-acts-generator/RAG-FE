@@ -4,26 +4,28 @@
   background-color: black;
   display: flex;
   margin-top: 20px;
-  align-items: center;
   position: absolute;
   bottom: 0;
   border: 0px solid white;
 }
 
-.footer-left {
-  margin-left: 2%;
-  width: 20%;
-  display: flex;
-  justify-content: space-around;
-}
-
-.footer-right {
-  margin-right: 2%;
-  width: 80%;
-  text-align: right;
-}
-
 a {
   text-decoration: none;
   color: white;
+}
+
+.footer-content-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  border: 0px solid white;
+}
+
+.copyright-info {
+  font-size: 0.8rem;
 }

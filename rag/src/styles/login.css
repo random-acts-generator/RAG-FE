@@ -1,9 +1,10 @@
 .left-image-text {
-  width: 110%;
+  width: 140%;
   height: auto;
+  margin-left: 30%;
 }
 .right-section-container-login {
-  height: 350px;
+  height: 25rem;
   width: 70%;
   background-color: black;
   border-radius: 10px;
@@ -12,7 +13,6 @@
 .right-section-register {
   border: 1px solid white;
   width: 70%;
-  margin-left: 10%;
   border: 1px solid white;
 }
 
@@ -74,7 +74,7 @@ textarea {
 
 .login-btn {
   width: 80%;
-  height: 35px;
+  height: 2.5rem;
   background: #1762a7;
   border-radius: 10px;
   text-align: center;
@@ -84,6 +84,11 @@ textarea {
   font-size: 1rem;
   margin-left: 3%;
   border: none;
+  cursor: pointer;
+}
+.login-btn:hover {
+  background: white;
+  color: #1762a7;
 }
 .form-text-register {
   font-size: 1rem;
@@ -97,8 +102,8 @@ textarea {
   border-bottom: 2px solid #b41561;
 }
 .profile-btn {
-  width: 150px;
-  height: 35px;
+  width: 35%;
+  height: 3rem;
   background: #1762a7;
   border-radius: 10px;
   text-align: center;
@@ -106,6 +111,11 @@ textarea {
   margin-bottom: 5%;
   color: white;
   font-size: 1rem;
-  margin-left: 5%;
+  margin-left: 7%;
   border: none;
+  cursor: pointer;
+}
+.profile-btn:hover {
+  background: white;
+  color: #1762a7;
 }

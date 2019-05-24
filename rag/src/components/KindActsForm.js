@@ -140,76 +140,79 @@ class KindActsForm extends React.Component {
       <div>
         <Nav isLoggedIn={this.props.isLoggedIn} />
         <div className="body-container">
-          <section className="left-section">
-            <div className="left-section-container-kindact ">
-              <form onSubmit={this.onSubmit}>
-                <div className="form-text-kindact">Act of kindness</div>
-                <div className="form-element-kindact">
-                  <input
-                    className="form-input-kindact"
-                    type="text"
-                    name="description"
-                    placeholder="Enter a new act of kindness"
-                    value={this.state.newAct.description}
-                    onChange={this.handleChanges}
-                  />
-                </div>
+          <div className="kindacts-content-container">
+            <section className="left-section">
+              <div className="left-section-container-kindact ">
+                <form onSubmit={this.onSubmit}>
+                  <div className="form-text-kindact">Act of kindness</div>
+                  <div className="form-element-kindact">
+                    <input
+                      className="form-input-kindact"
+                      type="text"
+                      name="description"
+                      placeholder="Enter a new act of kindness"
+                      value={this.state.newAct.description}
+                      onChange={this.handleChanges}
+                    />
+                  </div>
 
-                {!this.state.newAct.actId && (
+                  {!this.state.newAct.actId && (
+                    <button
+                      className="contact-btn"
+                      name="add"
+                      onClick={this.onSubmit}
+                    >
+                      Add Kind Act
+                    </button>
+                  )}
+                  {this.state.newAct.actId && (
+                    <button
+                      className="contact-btn-update"
+                      name="update"
+                      onClick={this.onSubmit}
+                    >
+                      Update Kind Act
+                    </button>
+                  )}
                   <button
                     className="contact-btn"
-                    name="add"
-                    onClick={this.onSubmit}
+                    name="cancel"
+                    onClick={this.handleCancelClick}
                   >
-                    Add Kind Act
+                    Cancel
                   </button>
-                )}
-                {this.state.newAct.actId && (
-                  <button
-                    className="contact-btn-update"
-                    name="update"
-                    onClick={this.onSubmit}
-                  >
-                    Update Kind Act
-                  </button>
-                )}
-                <button
-                  className="contact-btn"
-                  name="cancel"
-                  onClick={this.handleCancelClick}
-                >
-                  Cancel
-                </button>
-              </form>
-            </div>
-          </section>
-          <section className="right-section-kindact">
-            <div className="right-section-kindact-heading">
-              <div className="kindact-heading1">Act of kindness</div>
-              <div className="kindact-heading3" />
-            </div>
+                </form>
+              </div>
+            </section>
+            <section className="middle-section" />
+            <section className="right-section-kindact">
+              <div className="right-section-kindact-heading">
+                <div className="kindact-heading1">Act of kindness</div>
+                <div className="kindact-heading3" />
+              </div>
 
-            {isRender &&
-              this.props.acts.map(act => (
-                <div key={act.id} className="right-section-kindact-content">
-                  <div className="kindact-heading1-content">
-                    {act.description}
+              {isRender &&
+                this.props.acts.map(act => (
+                  <div key={act.id} className="right-section-kindact-content">
+                    <div className="kindact-heading1-content">
+                      {act.description}
+                    </div>
+                    <div className="kindact-heading3-content">
+                      <img
+                        className="kindact-form-img"
+                        src={Pencil}
+                        onClick={() => this.handleEditButton(act.id)}
+                      />
+                      <img
+                        className="kindact-form-img"
+                        src={Bin}
+                        onClick={() => this.handleDeleteButton(act.id)}
+                      />
+                    </div>
                   </div>
-                  <div className="kindact-heading3-content">
-                    <img
-                      className="kindact-form-img"
-                      src={Pencil}
-                      onClick={() => this.handleEditButton(act.id)}
-                    />
-                    <img
-                      className="kindact-form-img"
-                      src={Bin}
-                      onClick={() => this.handleDeleteButton(act.id)}
-                    />
-                  </div>
-                </div>
-              ))}
-          </section>
+                ))}
+            </section>
+          </div>
         </div>
         <div className="login-filler" />
         <Footer />
