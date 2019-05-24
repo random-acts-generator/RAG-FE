@@ -17,20 +17,27 @@ class HomePage extends React.Component {
     const token = localStorage.getItem("token");
     this.props
       .getContacts(this.props.user.id, token)
-      .then(() => {
-        this.setState({ ...this.state, formContacts: this.props.contacts });
+      .then(async () => {
+        await this.props.getActs(this.props.user.id, token);
       })
-      .then(() => {
-        this.props.getActs(this.props.user.id, token);
-      })
-      .then(() => {
-        this.setState({ ...this.state, formActs: this.props.acts });
+      .then(async () => {
+        await this.handleGenerateRandom();
       });
-    this.handleGenerateRandom();
   }
+  // componentDidUpdate() {
+  //   console.log(":: COMPONENT DID UPDATE");
+  //   if (!this.props.isGettingActs && !this.props.isGettingContacts) {
+  //     this.handleGenerateRandom();
+  //   }
+  //   console.log(
+  //     ":: RENDER OF HOMEPAGE :: " + JSON.stringify(this.state.randomGenerated)
+  //   );
+  // }
 
   handleGenerateRandom = () => {
     console.log(":: HANDLE GENERATE RANDOM");
+    console.log(":: ACTS ::" + JSON.stringify(this.props.acts));
+    console.log(":: CONTACTS ::" + JSON.stringify(this.props.contacts));
     var randomContact = this.props.contacts[
       Math.floor(Math.random() * this.props.contacts.length)
     ];
@@ -53,6 +60,9 @@ class HomePage extends React.Component {
     if (this.props.isGettingContacts) {
       return <div>Loading ...</div>;
     }
+    console.log(
+      ":: RENDER OF HOMEPAGE :: " + JSON.stringify(this.state.randomGenerated)
+    );
     return (
       <div>
         <Nav isLoggedIn={this.props.isLoggedIn} />
@@ -63,10 +73,10 @@ class HomePage extends React.Component {
           <section className="right-section">
             <div>
               <div className="right-section-content">
-                {this.state.randomGenerated.act}
+                {this.state.randomGenerated.contact}
               </div>
               <div className="right-section-content">
-                for {this.state.randomGenerated.contact}
+                {this.state.randomGenerated.act}
               </div>
             </div>
             <div className="generate-btn" onClick={this.handleGenerateRandom}>
